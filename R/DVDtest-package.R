@@ -5,6 +5,7 @@
 #' This package contains functions of a test on the difference between varying distributions. 
 #' 
 #' @name DVDtest-package
+#' @aliases DVDtest
 #' @docType package
 #' @author Meng Xu, Philip Reiss
 #' 
