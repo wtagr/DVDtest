@@ -47,6 +47,9 @@ esp. working in case of sparsity. Defaults to \code{FALSE}}
 \description{
 Testing the difference of two varying distributions.
 }
+\details{
+This is the Details section
+}
 \note{
 \itemize{
 \item If \code{mgcv.gam} is TRUE and \code{exclue} is NULL (default settings), 

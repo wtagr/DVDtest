@@ -2,6 +2,7 @@
 #' 
 #' Testing the difference of two varying distributions.
 #' 
+#' This is the Details section
 #' 
 #' @param ydata1 a \code{data.frame} or a \code{list} of \code{data.frame} containing 
 #' at least 3 columns called '\code{.obs}','\code{.index}','\code{.value}' which 
