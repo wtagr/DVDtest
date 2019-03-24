@@ -16,6 +16,7 @@
 #' 
 #' @name DVDtest-package
 #' @aliases DVDtest-package
+#' @aliases DVDtest
 #' @docType package
 #' @author
 #' c("\\Sexpr[results=rd,stage=build]{tools:::Rd_package_author(\"#1\")}",
