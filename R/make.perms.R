@@ -2,7 +2,7 @@
 #' 
 #' 
 #' @param dat1 an element of \code{ydata1}
-#' @param dat1 an element of \code{ydata2}
+#' @param dat2 an element of \code{ydata2}
 #' @param nperm a scalar, number of permutation
 #' @param .index see \code{eval.index.grid} in \code{DVDtest}
 #' @param adj see \code{permadj} in \code{DVDtest}
@@ -11,7 +11,7 @@
 #' @seealso \code{DVDtest}
 #' 
 make.perms <-
-function(dat1, dat2, nperm, .index, adj = permadj) {
+function(dat1, dat2, nperm, .index, adj) {
   n1 <- length(unique(dat1$.obs))
   n2 <- length(unique(dat2$.obs))
   matt <- matrix(NA,nperm, n1)

@@ -70,8 +70,9 @@
 #'  nperm. <- 50
 #'  
 #'  simu.test<-DVDtest(dg1,dg2,nperm.,ev.grid)
-#'  ggplot(data.frame(simu.test),aes(x=.index,y=pval))+geom_line()+
-#'  geom_hline(yintercept=0.05,linetype=2,col="red")
+#'  
+#'  #ggplot(data.frame(simu.test),aes(x=.index,y=pval))+geom_line()+
+#'  # geom_hline(yintercept=0.05,linetype=2,col="red")
 
 
 DVDtest <-

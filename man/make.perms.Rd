@@ -4,18 +4,18 @@
 \alias{make.perms}
 \title{Making permutated index}
 \usage{
-make.perms(dat1, dat2, nperm, .index, adj = permadj)
+make.perms(dat1, dat2, nperm, .index, adj)
 }
 \arguments{
 \item{dat1}{an element of \code{ydata1}}
+
+\item{dat2}{an element of \code{ydata2}}
 
 \item{nperm}{a scalar, number of permutation}
 
 \item{.index}{see \code{eval.index.grid} in \code{DVDtest}}
 
 \item{adj}{see \code{permadj} in \code{DVDtest}}
-
-\item{dat1}{an element of \code{ydata2}}
 }
 \value{
 a matrix, permuted indices

@@ -4,7 +4,7 @@
 \alias{wass_perm}
 \title{Calculating the distances via permuted data}
 \usage{
-wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat.all, ...,
+wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat, ...,
   exclude, mc.cores, dist.method)
 }
 \arguments{
@@ -18,7 +18,7 @@ wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat.all, ...,
 
 \item{eval.index.grid}{see \code{DVDtest}}
 
-\item{permat.all}{a result of \code{make.perm}}
+\item{permat}{a result of \code{make.perm}}
 
 \item{\dots}{partial arguments of \code{vdFun}}
 

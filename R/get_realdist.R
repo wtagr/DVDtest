@@ -12,11 +12,12 @@
 #' @return a vector or matrix of the distances
 #' @author Meng Xu, Philip Reiss
 #' @seealso \code{DVDtest}
+#' @import parallel
 
 
 get_realdist <-
 function(vdFun, ydata1, ydata2, ind.grid, ..., excl, mc.cores, dist.method){
-  library(parallel)
+
   if (mc.cores == 1) {
     real.list <- sapply(1:length(ydata1), get.realdist, vdFun = vdFun,
          ydata1 = ydata1, ydata2 = ydata2,

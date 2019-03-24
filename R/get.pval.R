@@ -10,6 +10,7 @@
 #' @return a vector or matrix of p value
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{DVDtest}
+#' @import gamlss.dist
 #' 
 get.pval <-
 function(permarray, param.array, realdists, nroi, eval.index.grid, nperm){

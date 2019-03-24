@@ -12,12 +12,12 @@
 #' @return a vector of the distances
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{DVDtest}
-#' 
+#' @import mgcv
 #' 
 get.realdist <-
 function(k, vdFun, ydata1, ydata2, ind.grid,
                        ..., excl, dist.method){
-  library(mgcv)
+
   argmt <- list(...)
   if (is.null(argmt[["formula"]])) {
     g1 <- vdFun(data = ydata1[[k]],

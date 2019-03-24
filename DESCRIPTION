@@ -9,4 +9,6 @@ Description: See DVDtest.
 RoxygenNote: 6.1.1
 License: GPL (>= 2)
 Encoding: UTF-8
-Imports: mgcv, ggplot2, reshape2, gamlss
+Depends: R (>= 3.5), gamlss, mgcv
+Imports: ggplot2, reshape2, parallel, gamlss.dist
+

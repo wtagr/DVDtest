@@ -12,12 +12,12 @@
 #' @note NULL
 #' @author Meng Xu, Philip Reiss
 #' @seealso \code{DVDtest}
-#' 
+#' @import gamlss
 #' 
 get_params <-
 function(nroi, nperm, permarray, eval.index.grid){
   param.array<- array(dim = c(3,length(eval.index.grid), nroi))
-  require(gamlss)
+
   predlist <- lapply(1:nroi, get.params, nperm = nperm, permarray = permarray,
                    eval.index.grid = eval.index.grid)
   for (roi in 1:nroi) {

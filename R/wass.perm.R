@@ -14,12 +14,13 @@
 #' @return a matrix of permuted-data distances
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{wass_perm}
+#' @import mgcv
 #' 
 
 wass.perm <-
 function(k, vdFun, dat1, dat2, ..., permat, .index, 
                       report.every = 10, exclude, dist.method) {
-  require(mgcv)
+
   dat1 <- dat1[[k]]
   dat2 <- dat2[[k]]
   n1 <- length(unique(dat1$.obs))

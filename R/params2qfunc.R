@@ -5,6 +5,7 @@
 #' @param dist.method see \code{DVDtest}
 #' @return quantile or density functions
 #' @author Meng Xu, Philip Reiss
+#' @import gamlss gamlss.dist
 #' 
 params2qfunc <-
 function(params, family, dist.method) {

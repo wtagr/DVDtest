@@ -2,12 +2,12 @@
 % Please edit documentation in R/get.params.R
 \name{get.params}
 \alias{get.params}
-\title{Fitting the generalized gamma (Pearson type III) distribution for each roi}
+\title{Fitting the generalized gamma (Pearson type III) distribution for each k}
 \usage{
-get.params(roi, nperm, permarray, eval.index.grid)
+get.params(k, nperm, permarray, eval.index.grid)
 }
 \arguments{
-\item{roi}{a scalar, \code{roi}th data.frame in \code{ydata1&2}}
+\item{k}{a scalar, \code{k}th data.frame in \code{ydata1&2}}
 
 \item{nperm}{a scalar, number of permutation}
 

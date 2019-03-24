@@ -6,7 +6,7 @@
 #' @param \dots extra arguments in \code{integrate}
 #' @return distance functions
 #' @author Meng Xu, Philip Reiss
-#' 
+#' @import stats
 #' 
 qfuncs2wass2 <-
 function(qfunc1, qfunc2, dist.method = dist.method, ...) {
