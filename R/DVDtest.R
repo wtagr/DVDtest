@@ -7,7 +7,7 @@
 #' @param ydata1 a \code{data.frame} or a \code{list} of \code{data.frame} containing 
 #' at least 3 columns called '\code{.obs}','\code{.index}','\code{.value}' which 
 #' specify which curve the point belongs to (\code{.obs}) at which ('\code{.index}') 
-#' it was observed and the ovserved value (\code{'.value'}). Other variables are 
+#' it was observed and the observed value (\code{'.value'}). Other variables are 
 #' available for modelling the varying distribution as well.
 #' @param ydata2 same type as \code{ydata1}. If the type of \code{ydata1} and \code{ydata2}
 #' is a \code{list} of \code{data.frame}, the lenghs of two lists must be the same.
