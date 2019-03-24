@@ -3,7 +3,6 @@
 \docType{package}
 \name{DVDtest-package}
 \alias{DVDtest-package}
-\alias{DVDtest}
 \title{Difference between Varying Distributions Test (DVDtest)}
 \description{
 This package contains functions of a test on the difference between varying distributions.
