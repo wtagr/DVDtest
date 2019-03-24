@@ -3,12 +3,11 @@ Type: Package
 Title: Difference between Varying Distributions Test (DVDtest)
 Version: 0.1
 Date: 2019-03-24
-Author: Meng Xu, Philip Reiss
+Authors: Meng Xu, Philip Reiss
 Maintainer: Meng Xu <mxu@campus.haifa.ac.il>
 Description: See DVDtest.
 RoxygenNote: 6.1.1
 License: GPL (>= 2)
 Encoding: UTF-8
-Depends: R (>= 3.5), gamlss, mgcv
-Imports: ggplot2, reshape2, parallel, gamlss.dist
+Imports: gamlss, mgcv, ggplot2, reshape2, parallel, gamlss.dist
 
