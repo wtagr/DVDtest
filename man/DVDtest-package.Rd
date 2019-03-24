@@ -3,7 +3,6 @@
 \docType{package}
 \name{DVDtest-package}
 \alias{DVDtest-package}
-\alias{DVDtest}
 \title{c("\\Sexpr[results=rd,stage=build]{tools:::Rd_package_title(\"#1\")}",
 "DVDtest")\Sexpr{tools:::Rd_package_title("DVDtest")}}
 \description{

@@ -15,7 +15,7 @@
 #' how to use the package, including the most important functions ~~
 #' 
 #' @name DVDtest-package
-#' @aliases DVDtest-package DVDtest
+#' @aliases DVDtest-package
 #' @docType package
 #' @author
 #' c("\\Sexpr[results=rd,stage=build]{tools:::Rd_package_author(\"#1\")}",
