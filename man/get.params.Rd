@@ -4,7 +4,7 @@
 \alias{get.params}
 \title{Fitting the generalized gamma (Pearson type III) distribution for each k}
 \usage{
-get.params(k, nperm, permarray, eval.index.grid)
+get.params(k, nperm, permarray, grid)
 }
 \arguments{
 \item{k}{a scalar, \code{k}th data.frame in \code{ydata1&2}}
@@ -13,11 +13,10 @@ get.params(k, nperm, permarray, eval.index.grid)
 
 \item{permarray}{an array, permuted-data distances from \code{wass_perm}}
 
-\item{eval.index.grid}{a vector, evaluation grid of \code{.index}}
+\item{grid}{a vector, evaluation grids of \code{.index}}
 }
 \value{
-\item{mu}{a vector of mean}, \item{sigma}{a vector of sigma}, 
-\item{nu}{a vector of nu}, \item{aic}{the Akaike information criterion in \code{gamlss}}
+a list of mean, sigma, nu and the AIC
 }
 \description{
 Fitting by the permuted-data distances
@@ -28,3 +27,4 @@ Fitting by the permuted-data distances
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}

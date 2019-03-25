@@ -1,4 +1,4 @@
-#' Calculating the distances via permuted data for each \code{k}
+#' Calculating the distances via permuted data for each k
 #' 
 #' 
 #' @param k a scalar, \code{k}th \code{data.frame} of \code{ydata1&2}
@@ -7,7 +7,7 @@
 #' @param dat2 \code{k}th \code{data.frame} of \code{ydata2}
 #' @param \dots arguments of \code{vdFun}
 #' @param permat a result of \code{make.perm}
-#' @param .index see \code{eval.index.grid} in \code{DVDtest}
+#' @param .index see \code{grid} in \code{DVDtest}
 #' @param report.every a scalar, reporting the number permutation
 #' @param exclude an argument of \code{predict}  
 #' @param dist.method see \code{DVDtest}
@@ -15,7 +15,7 @@
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{wass_perm}
 #' @import mgcv
-#' 
+#' @keywords internal
 
 wass.perm <-
 function(k, vdFun, dat1, dat2, ..., permat, .index, 

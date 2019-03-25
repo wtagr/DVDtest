@@ -10,7 +10,7 @@
 #' @param \dots partial arguments in \code{predict}
 #' @return a vector, distances
 #' @author Philip Reiss, Meng Xu
-#' 
+#' @keywords internal
 multiwass <-
 function(obj1, obj2, newdata1, newdata2, dist.method, ...) {
   npts <- NROW(newdata1)

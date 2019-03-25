@@ -22,3 +22,4 @@ Getting the quantile/density function via parameters
 \author{
 Meng Xu, Philip Reiss
 }
+\keyword{internal}

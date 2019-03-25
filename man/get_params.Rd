@@ -4,7 +4,7 @@
 \alias{get_params}
 \title{Fitting the generalized gamma (Pearson type III) distribution}
 \usage{
-get_params(nroi, nperm, permarray, eval.index.grid)
+get_params(nroi, nperm, permarray, grid)
 }
 \arguments{
 \item{nroi}{a scalar, the length of \code{ydata1} or \code{ydata2}}
@@ -13,7 +13,7 @@ get_params(nroi, nperm, permarray, eval.index.grid)
 
 \item{permarray}{an array, permuted-data distances from \code{wass_perm}}
 
-\item{eval.index.grid}{a vector, evaluation grid of \code{.index}}
+\item{grid}{a vector, evaluation grid of \code{.index}}
 }
 \value{
 an array, \code{param.array}
@@ -27,3 +27,4 @@ Fitting the generalized gamma (Pearson type III) distribution
 \author{
 Meng Xu, Philip Reiss
 }
+\keyword{internal}

@@ -4,7 +4,7 @@
 \alias{get.pval}
 \title{Calculate the corrected P values}
 \usage{
-get.pval(permarray, param.array, realdists, nroi, eval.index.grid, nperm)
+get.pval(permarray, param.array, realdists, nroi, grid, nperm)
 }
 \arguments{
 \item{permarray}{an array, permuted-data distances from \code{wass_perm}}
@@ -15,7 +15,7 @@ get.pval(permarray, param.array, realdists, nroi, eval.index.grid, nperm)
 
 \item{nroi}{a scalar, the length of \code{ydata1}}
 
-\item{eval.index.grid}{a vector, evaluation grid of \code{.index}}
+\item{grid}{a vector, evaluation grids of \code{.index}}
 
 \item{nperm}{a scalar, number of permutation}
 }
@@ -26,8 +26,9 @@ a vector or matrix of p value
 Calculate the corrected P values
 }
 \seealso{
-\code{DVDtest}
+\code{\link{DVDtest}}
 }
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}

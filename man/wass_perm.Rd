@@ -4,8 +4,8 @@
 \alias{wass_perm}
 \title{Calculating the distances via permuted data}
 \usage{
-wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat, ...,
-  exclude, mc.cores, dist.method)
+wass_perm(vdFun, nperm, ydata1, ydata2, grid, permat, ..., exclude,
+  mc.cores, dist.method)
 }
 \arguments{
 \item{vdFun}{a function, \code{gam} or \code{gamlss}, for fitting the varying distributions}
@@ -16,7 +16,7 @@ wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat, ...,
 
 \item{ydata2}{see \code{DVDtest}}
 
-\item{eval.index.grid}{see \code{DVDtest}}
+\item{grid}{see \code{\link{DVDtest}}}
 
 \item{permat}{a result of \code{make.perm}}
 
@@ -40,3 +40,4 @@ Calculating the distances via permuted data
 \author{
 Meng Xu, Philip Reiss
 }
+\keyword{internal}

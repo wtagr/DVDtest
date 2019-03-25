@@ -2,9 +2,9 @@
 % Please edit documentation in R/get.realdist.R
 \name{get.realdist}
 \alias{get.realdist}
-\title{Calculating the distances under the null hypothesis for each roi}
+\title{Calculating the distances under the null hypothesis for each k}
 \usage{
-get.realdist(k, vdFun, ydata1, ydata2, ind.grid, ..., excl, dist.method)
+get.realdist(k, vdFun, ydata1, ydata2, grid, ..., excl, dist.method)
 }
 \arguments{
 \item{k}{a scalar, \code{k}th data.frame in \code{ydata1&2}}
@@ -15,7 +15,7 @@ get.realdist(k, vdFun, ydata1, ydata2, ind.grid, ..., excl, dist.method)
 
 \item{ydata2}{see \code{DVDtest}}
 
-\item{ind.grid}{see \code{eval.index.grid} in \code{DVDtest}}
+\item{grid}{see \code{DVDtest}}
 
 \item{\dots}{arguments of \code{vdFun}}
 
@@ -27,11 +27,12 @@ get.realdist(k, vdFun, ydata1, ydata2, ind.grid, ..., excl, dist.method)
 a vector of the distances
 }
 \description{
-Calculating the distances under the null hypothesis for each roi
+Calculating the distances under the null hypothesis for each k
 }
 \seealso{
-\code{DVDtest}
+\code{\link{DVDtest}}
 }
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}

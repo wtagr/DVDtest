@@ -2,12 +2,12 @@
 #' 
 #' @param qfunc1 quantile or density functions from \code{params2qfunc}
 #' @param qfunc2 quantile or density functions from \code{params2qfunc}
-#' @param dist.method see \code{DVDtest}
+#' @param dist.method see \code{\link{DVDtest}}
 #' @param \dots extra arguments in \code{integrate}
 #' @return distance functions
 #' @author Meng Xu, Philip Reiss
 #' @import stats
-#' 
+#' @keywords internal
 qfuncs2wass2 <-
 function(qfunc1, qfunc2, dist.method = dist.method, ...) {
   if (dist.method=='wass'){

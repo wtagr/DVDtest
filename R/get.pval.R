@@ -5,18 +5,19 @@
 #' @param param.array an array, permuted-data distances from \code{get_params}
 #' @param realdists a matrix or vector, the value from \code{get_realdist}
 #' @param nroi a scalar, the length of \code{ydata1}
-#' @param eval.index.grid a vector, evaluation grid of \code{.index}
+#' @param grid a vector, evaluation grids of \code{.index}
 #' @param nperm a scalar, number of permutation
 #' @return a vector or matrix of p value
 #' @author Philip Reiss, Meng Xu
-#' @seealso \code{DVDtest}
+#' @seealso \code{\link{DVDtest}}
 #' @import gamlss.dist
+#' @keywords internal
 #' 
 get.pval <-
-function(permarray, param.array, realdists, nroi, eval.index.grid, nperm){
+function(permarray, param.array, realdists, nroi, grid, nperm){
   p.perm <- array(NA, dim = dim(permarray))
   p.real <- array(dim = dim(realdists))
-  for (k in 1:length(eval.index.grid)) for (l in 1:nroi) {
+  for (k in 1:length(grid)) for (l in 1:nroi) {
     mu <- param.array[1,k,l]
     sigma <- param.array[2,k,l]
     nu <- param.array[3,k,l]

@@ -6,7 +6,7 @@
 #' @return quantile or density functions
 #' @author Meng Xu, Philip Reiss
 #' @import gamlss gamlss.dist
-#' 
+#' @keywords internal
 params2qfunc <-
 function(params, family, dist.method) {
   mu <- params$mu

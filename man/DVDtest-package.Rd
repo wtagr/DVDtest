@@ -5,14 +5,14 @@
 \alias{DVDtest-package}
 \title{Difference between Varying Distributions Test (DVDtest)}
 \description{
-This package contains functions of a test on the difference between varying distributions.
-}
-\references{
-reiss-EMR18.pdf
+This package contains a series of internal and external functions of 
+Difference between Varying Distributions Test (DVDtest), which tests the pointwise
+group differences two varying distributions.
 }
 \seealso{
 \code{\link{DVDtest}}
 }
 \author{
 Meng Xu, Philip Reiss
+Maintainer: Meng Xu <mxu@campus.haifa.ac.il>
 }

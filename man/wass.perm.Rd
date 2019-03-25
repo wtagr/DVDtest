@@ -2,7 +2,7 @@
 % Please edit documentation in R/wass.perm.R
 \name{wass.perm}
 \alias{wass.perm}
-\title{Calculating the distances via permuted data for each \code{k}}
+\title{Calculating the distances via permuted data for each k}
 \usage{
 wass.perm(k, vdFun, dat1, dat2, ..., permat, .index, report.every = 10,
   exclude, dist.method)
@@ -20,7 +20,7 @@ wass.perm(k, vdFun, dat1, dat2, ..., permat, .index, report.every = 10,
 
 \item{permat}{a result of \code{make.perm}}
 
-\item{.index}{see \code{eval.index.grid} in \code{DVDtest}}
+\item{.index}{see \code{grid} in \code{DVDtest}}
 
 \item{report.every}{a scalar, reporting the number permutation}
 
@@ -32,7 +32,7 @@ wass.perm(k, vdFun, dat1, dat2, ..., permat, .index, report.every = 10,
 a matrix of permuted-data distances
 }
 \description{
-Calculating the distances via permuted data for each \code{k}
+Calculating the distances via permuted data for each k
 }
 \seealso{
 \code{wass_perm}
@@ -40,3 +40,4 @@ Calculating the distances via permuted data for each \code{k}
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}

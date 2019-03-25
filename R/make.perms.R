@@ -4,12 +4,12 @@
 #' @param dat1 an element of \code{ydata1}
 #' @param dat2 an element of \code{ydata2}
 #' @param nperm a scalar, number of permutation
-#' @param .index see \code{eval.index.grid} in \code{DVDtest}
+#' @param .index see \code{grid} in \code{DVDtest}
 #' @param adj see \code{permadj} in \code{DVDtest}
 #' @return a matrix, permuted indices
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{DVDtest}
-#' 
+#' @keywords internal
 make.perms <-
 function(dat1, dat2, nperm, .index, adj) {
   n1 <- length(unique(dat1$.obs))

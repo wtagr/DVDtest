@@ -4,45 +4,48 @@
 \alias{DVDtest}
 \title{Difference between Varying Distributions Test (DVDtest)}
 \usage{
-DVDtest(ydata1, ydata2, nperm, eval.index.grid, dist.method = "wass",
+DVDtest(ydata1, ydata2, nperm, grid, dist.method = "wass",
   mgcv.gam = TRUE, ..., exclude = NULL, permadj = FALSE,
   mc.cores = 1)
 }
 \arguments{
-\item{ydata1}{a \code{data.frame} or a \code{list} of \code{data.frame} containing 
-at least 3 columns called '\code{.obs}','\code{.index}','\code{.value}' which 
+\item{ydata1}{a \code{data.frame} or a \code{list} of \code{data.frame}, containing 
+at least 3 columns called '\code{.obs}', '\code{.index}' and '\code{.value}' which 
 specify which curve the point belongs to (\code{.obs}) at which ('\code{.index}') 
-it was observed and the observed value (\code{'.value'}). Other variables are 
-available for modelling the varying distribution as well.}
+it was observed and the observed value (\code{'.value'}). Other columns are 
+available as well for modelling the varying distributions.}
 
-\item{ydata2}{same type as \code{ydata1}. If the type of \code{ydata1} and \code{ydata2}
-is a \code{list} of \code{data.frame}, the lenghs of two lists must be the same.}
+\item{ydata2}{same as \code{ydata1}.}
 
 \item{nperm}{a scalar, number of permutation}
 
-\item{eval.index.grid}{a vector, evaluation grid of \code{.index}}
+\item{grid}{a vector, evaluation grids of \code{.index}}
 
-\item{dist.method}{the methods, Wasserstein(\code{'wass'}), L2(\code{L2}), 
-L1(\code{'L1'}) and Hellinger(\code{'Hellinger'}) to calculate the distances between 
-distributions. Defaults to \code{'wass'}.}
+\item{dist.method}{the distance measure to be used. This must be one of Wasserstein 
+distance (\code{'wass'}), \code{L2} distance, \code{'L1'} distance and \code{'Hellinger'}). 
+Defaults to \code{'wass'}.}
 
 \item{mgcv.gam}{a logical variable, whether to apply \code{mgcv::gam} for eastimating 
 distributions, whose parameters are a smooth function of a continuous variable. If 
 \code{FALSE}, \code{gamlss::gamlss} is adopted.}
 
-\item{\dots}{If \code{mgcv.gam = TRUE}, \code{\dots} should include \code{formula} and 
-\code{family}(=\code{gaulss()}) and other arguments in \code{mgcv::gam}. Otherwise, 
-the arguments in gamlss::gamlss are included.}
+\item{\dots}{passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
+\code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
+other optional arguments in \code{mgcv::gam}. Otherwise, \code{...} passed to 
+arguments inside of \code{gamlss::gamlss} are needed.}
 
-\item{exclude}{works only in the case of \code{mgcv.gam = TRUE}, to exclude the random effect}
+\item{exclude}{passed to \code{exclude} inside of \code{predict.gam} 
+in the case \code{mgcv.gam = TRUE}.}
 
-\item{permadj}{a logical variable, whether to adjust the permutated data to cover the entire range,
-esp. working in case of sparsity. Defaults to \code{FALSE}}
+\item{permadj}{a logical variable, whether to adjust the permutated data to cover 
+the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 
-\item{mc.cores}{the same argument in \code{mclapply} (not work on Windows). Defaults to 1.}
+\item{mc.cores}{passed to \code{mc.cores} inside of \code{mclapply} 
+(not available on Windows unless \code{mc.cores = 1}). Defaults to \code{1}.}
 }
 \value{
-{.index}{a vector, evaluation grid} %% \item{pval}{a vector or matrix of p value}
+\item{.index}{a vector, evaluation grids}
+\item{pval}{a vector or matrix of p values}
 }
 \description{
 Testing the difference of two varying distributions.
@@ -52,48 +55,54 @@ This is the Details section
 }
 \note{
 \itemize{
-\item If \code{mgcv.gam} is TRUE and \code{exclue} is NULL (default settings), 
-then \code{formula. <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} and 
-\code{exclude. <- "s(.obs)"}
+\item If the types of \code{ydata1} and \code{ydata2} are \code{list} of 
+\code{data.frame}s, the lenghs of two lists must be the same.
+
+\item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
+(default settings), then both defaults to 
+\code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} 
+and \code{exclude <- "s(.obs)"}
 }
 }
 \examples{
 
- p=6
- mu1<-function(t) 0.2*(p-1)*sin(pi*t)+t+1
- mu2<-function(t) -0.2*(p-1)*sin(pi*t)+t+1
+## Data Generation ##
+ p <- 6
+ mu1 <- function(t) 0.2*(p-1)*sin(pi*t)+t+1
+ mu2 <- function(t) -0.2*(p-1)*sin(pi*t)+t+1
  sig1 <- function(t) t+1
  sig2 <- sig1
- nperson=10
- fun1<-function(t) rnorm(nperson,mu1(t),sig1(t))
- fun2<-function(t) rnorm(nperson,mu2(t),sig2(t))
- tp<-seq(0,1,,10)
- data1<-sapply(tp,fun1)
- data2<-sapply(tp,fun2)
+ nperson <- 10
+ fun1 <- function(t) rnorm(nperson, mu1(t), sig1(t))
+ fun2 <- function(t) rnorm(nperson, mu2(t), sig2(t))
+ tp <- seq(0,1,,10)
+ data1 <- sapply(tp,fun1)
+ data2 <- sapply(tp,fun2)
  
  library(reshape2)
- colnames(data1)<-tp
- dg1<-melt(data1)
- colnames(dg1)<-c('.obs','.index','.value')
- dg1$.obs<-as.factor(dg1$.obs)
+ colnames(data1) <- tp
+ dg1 <- melt(data1)
+ colnames(dg1) <- c('.obs','.index','.value')
+ dg1$.obs <- as.factor(dg1$.obs)
  
- colnames(data2)<-tp
- rownames(data2)<-1:nperson+2*nperson
- dg2<-melt(data2)
- colnames(dg2)<-c('.obs','.index','.value')
- dg2$.obs<-as.factor(dg2$.obs)
+ colnames(data2) <- tp
+ rownames(data2) <- 1:nperson+2*nperson
+ dg2 <- melt(data2)
+ colnames(dg2) <- c('.obs','.index','.value')
+ dg2$.obs <- as.factor(dg2$.obs)
  # library(ggplot2)
- # ggplot()+geom_line(data=dg1,aes(x=.index,y=.value,col=factor(.obs)))+
- #   geom_line(data=dg2,aes(x=.index,y=.value,col=factor(.obs)))
+ # ggplot() + geom_line(data = dg1, aes(x = .index,y = .value, col = factor(.obs)))
+ # + geom_line(data = dg2, aes(x = .index, y = .value, col = factor(.obs)))
 
- ngrid=50
+ ngrid <- 50
  ev.grid <- seq(0, 1, , ngrid)
  nperm. <- 50
  
- simu.test<-DVDtest(dg1,dg2,nperm.,ev.grid)
+ ####
+ simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
  
- #ggplot(data.frame(simu.test),aes(x=.index,y=pval))+geom_line()+
- # geom_hline(yintercept=0.05,linetype=2,col="red")
+ #ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
+ # + geom_hline(yintercept = 0.05, linetype = 2, col = "red")
 }
 \references{
 reiss-EMR18.pdf
@@ -101,5 +110,5 @@ reiss-EMR18.pdf
 \author{
 Meng Xu, Philip Reiss
 }
-\keyword{minp}
-\keyword{permutation}
+\keyword{Permutation,}
+\keyword{pointwise}

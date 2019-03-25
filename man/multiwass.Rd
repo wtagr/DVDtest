@@ -28,3 +28,4 @@ Calculating the distances between two gam/gamlss objects
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}

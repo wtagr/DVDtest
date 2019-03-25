@@ -11,7 +11,7 @@ qfuncs2wass2(qfunc1, qfunc2, dist.method = dist.method, ...)
 
 \item{qfunc2}{quantile or density functions from \code{params2qfunc}}
 
-\item{dist.method}{see \code{DVDtest}}
+\item{dist.method}{see \code{\link{DVDtest}}}
 
 \item{\dots}{extra arguments in \code{integrate}}
 }
@@ -24,3 +24,4 @@ Distance functions
 \author{
 Meng Xu, Philip Reiss
 }
+\keyword{internal}

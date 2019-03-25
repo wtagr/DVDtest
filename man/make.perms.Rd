@@ -13,7 +13,7 @@ make.perms(dat1, dat2, nperm, .index, adj)
 
 \item{nperm}{a scalar, number of permutation}
 
-\item{.index}{see \code{eval.index.grid} in \code{DVDtest}}
+\item{.index}{see \code{grid} in \code{DVDtest}}
 
 \item{adj}{see \code{permadj} in \code{DVDtest}}
 }
@@ -29,3 +29,4 @@ Making permutated index
 \author{
 Philip Reiss, Meng Xu
 }
+\keyword{internal}
