@@ -10,7 +10,3 @@ RoxygenNote: 6.1.1
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports: gamlss, mgcv, ggplot2, reshape2, parallel, gamlss.dist
-Suggests: 
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
