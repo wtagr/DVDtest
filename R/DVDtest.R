@@ -38,9 +38,9 @@
 #' \code{data.frame}s, the lenghs of two lists must be the same.
 #' 
 #' \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
-#' (default settings), then both defaults to 
+#' (default settings), then defaults to 
 #' \code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} 
-#' and \code{exclude <- "s(.obs)"}
+#' and \code{exclude <- "s(.obs)"}, repectively.
 #' }
 #' @author Meng Xu, Philip Reiss
 #' @references reiss-EMR18.pdf

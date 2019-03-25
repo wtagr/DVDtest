@@ -23,7 +23,7 @@ distributions.}
 \item{grid}{a vector, evaluation grids of \code{.index}}
 
 \item{dist.method}{the distance measure to be used. This must be one of Wasserstein 
-distance (\code{'wass'}), \code{L2} distance, \code{'L1'} distance and \code{'Hellinger'}. 
+distance (\code{'wass'}), \code{'L2'} distance, \code{'L1'} distance and \code{'Hellinger'}. 
 Defaults to \code{'wass'}.}
 
 \item{mgcv.gam}{a logical variable, whether to apply \code{mgcv::gam} for eastimating 
@@ -60,9 +60,9 @@ This is the Details section
 \code{data.frame}s, the lenghs of two lists must be the same.
 
 \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
-(default settings), then both defaults to 
+(default settings), then defaults to 
 \code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} 
-and \code{exclude <- "s(.obs)"}
+and \code{exclude <- "s(.obs)"}, repectively.
 }
 }
 \examples{
