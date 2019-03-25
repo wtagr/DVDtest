@@ -32,10 +32,10 @@ distributions, whose parameters are a smooth function of a continuous variable. 
 \item{\dots}{passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
 \code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
 other optional arguments in \code{mgcv::gam}. Otherwise, \code{...} passed to 
-arguments inside of \code{gamlss::gamlss} are needed.}
+arguments inside of \code{gamlss::gamlss}.}
 
 \item{exclude}{passed to \code{exclude} inside of \code{predict.gam} 
-in the case \code{mgcv.gam = TRUE}.}
+in case \code{mgcv.gam = TRUE}.}
 
 \item{permadj}{a logical variable, whether to adjust the permutated data to cover 
 the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
@@ -110,5 +110,5 @@ reiss-EMR18.pdf
 \author{
 Meng Xu, Philip Reiss
 }
-\keyword{Permutation,}
+\keyword{permutation,}
 \keyword{pointwise}

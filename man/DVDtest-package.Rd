@@ -7,7 +7,7 @@
 \description{
 This package contains a series of internal and external functions of 
 Difference between Varying Distributions Test (DVDtest), which tests the pointwise
-group differences two varying distributions.
+group differences between two varying distributions.
 }
 \seealso{
 \code{\link{DVDtest}}

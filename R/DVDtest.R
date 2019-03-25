@@ -21,9 +21,9 @@
 #' @param \dots passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
 #' \code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
 #' other optional arguments in \code{mgcv::gam}. Otherwise, \code{...} passed to 
-#' arguments inside of \code{gamlss::gamlss} are needed.
+#' arguments inside of \code{gamlss::gamlss}.
 #' @param exclude passed to \code{exclude} inside of \code{predict.gam} 
-#' in the case \code{mgcv.gam = TRUE}.
+#' in case \code{mgcv.gam = TRUE}.
 #' @param permadj a logical variable, whether to adjust the permutated data to cover 
 #' the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
@@ -43,7 +43,7 @@
 #' }
 #' @author Meng Xu, Philip Reiss
 #' @references reiss-EMR18.pdf
-#' @keywords Permutation, pointwise
+#' @keywords permutation, pointwise
 #' @export
 #' @examples
 #' 
