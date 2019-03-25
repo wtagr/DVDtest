@@ -61,8 +61,12 @@ This is the Details section
 
 \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
 (default settings), then defaults to \cr
-\code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} \cr
+\code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 and \code{exclude <- "s(.obs)"}, repectively.
+
+\item Now Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
+gamlss::gamlss are supported by \code{DVDtest} for fitting a GAMLSS. 
+Please contact the maintainer for further supporting.
 }
 }
 \examples{
