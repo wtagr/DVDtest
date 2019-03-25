@@ -14,7 +14,7 @@
 #' @param nperm a scalar, number of permutation
 #' @param grid a vector, evaluation grids of \code{.index}
 #' @param dist.method the distance measure to be used. This must be one of Wasserstein 
-#' distance (\code{'wass'}), \code{L2} distance, \code{'L1'} distance and \code{'Hellinger'}). 
+#' distance (\code{'wass'}), \code{'L2'} distance, \code{'L1'} distance and \code{'Hellinger'}. 
 #' Defaults to \code{'wass'}.
 #' @param mgcv.gam a logical variable, whether to apply \code{mgcv::gam} for eastimating 
 #' distributions, whose parameters are a smooth function of a continuous variable. If 

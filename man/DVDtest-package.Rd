@@ -14,5 +14,6 @@ group differences between two varying distributions.
 }
 \author{
 Meng Xu, Philip Reiss
+
 Maintainer: Meng Xu <mxu@campus.haifa.ac.il>
 }

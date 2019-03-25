@@ -9,6 +9,7 @@
 #' @name DVDtest-package
 #' @docType package
 #' @author Meng Xu, Philip Reiss
+#' 
 #' Maintainer: Meng Xu <mxu@campus.haifa.ac.il>
 #' @seealso \code{\link{DVDtest}}
 #' 
