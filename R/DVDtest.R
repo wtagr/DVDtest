@@ -28,7 +28,7 @@
 #' @param permadj a logical variable, whether to adjust the permutated data to cover 
 #' the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
-#' (not available on Windows unless \code{mc.cores = 1}). Defaults to \code{1}.
+#' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}.
 #' @return 
 #' \item{.index}{a vector, evaluation grids}
 #' \item{pval}{a vector or matrix of (corrected) p values}
@@ -38,8 +38,8 @@
 #' \code{data.frame}s, the lenghs of two lists must be the same.
 #' 
 #' \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
-#' (default settings), then defaults to 
-#' \code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} 
+#' (default settings), then defaults to \cr
+#' \code{formula <- list(.value~s(.index)+s(.obs, bs="re"), ~s(.index))} \cr
 #' and \code{exclude <- "s(.obs)"}, repectively.
 #' }
 #' @author Meng Xu, Philip Reiss
@@ -83,7 +83,7 @@
 #' ####
 #'  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
 #'  
-#'  #ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
+#'  # ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
 #'  # + geom_hline(yintercept = 0.05, linetype = 2, col = "red")
 
 
