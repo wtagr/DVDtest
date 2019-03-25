@@ -1,0 +1,41 @@
+\begin{theindex}
+
+  \item $*$Topic{\relax \fontsize  {12}{14}\selectfont  \ \textbf  {minp}}
+    \subitem \texttt  {DVDtest}, \hyperpage{2}
+  \item $*$Topic{\relax \fontsize  {12}{14}\selectfont  \ \textbf  {permutation}}
+    \subitem \texttt  {DVDtest}, \hyperpage{2}
+
+  \indexspace
+
+  \item \texttt  {DVDtest}, \hyperindexformat{\textit}{2}, 
+		\hyperpage{2}
+  \item \texttt  {DVDtest-package}, \hyperpage{2}
+
+  \indexspace
+
+  \item \texttt  {get.params}, \hyperpage{4}
+  \item \texttt  {get.pval}, \hyperpage{5}
+  \item \texttt  {get.realdist}, \hyperpage{5}
+  \item \texttt  {get\_params}, \hyperindexformat{\textit}{4}, 
+		\hyperpage{6}
+  \item \texttt  {get\_realdist}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {make.perms}, \hyperpage{7}
+  \item \texttt  {multiwass}, \hyperpage{8}
+
+  \indexspace
+
+  \item \texttt  {params2qfunc}, \hyperpage{9}
+
+  \indexspace
+
+  \item \texttt  {qfuncs2wass2}, \hyperpage{9}
+
+  \indexspace
+
+  \item \texttt  {wass.perm}, \hyperpage{10}
+  \item \texttt  {wass\_perm}, \hyperpage{11}
+
+\end{theindex}

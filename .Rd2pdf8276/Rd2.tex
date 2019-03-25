@@ -1,0 +1,612 @@
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\inputencoding{utf8}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Difference between Varying Distributions Test (DVDtest)}
+\item[Version]\AsIs{0.1}
+\item[Date]\AsIs{2019-03-24}
+\item[Author]\AsIs{Meng Xu, Philip Reiss}
+\item[Maintainer]\AsIs{Meng Xu }\email{mxu@campus.haifa.ac.il}\AsIs{}
+\item[Description]\AsIs{See DVDtest.}
+\item[RoxygenNote]\AsIs{6.1.1}
+\item[License]\AsIs{GPL (>= 2)}
+\item[Encoding]\AsIs{UTF-8}
+\item[Imports]\AsIs{gamlss, mgcv, ggplot2, reshape2, parallel, gamlss.dist}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{DVDtest-package}{Difference between Varying Distributions Test (DVDtest)}{DVDtest.Rdash.package}
+%
+\begin{Description}\relax
+This package contains functions of a test on the difference between varying distributions.
+\end{Description}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+%
+\begin{References}\relax
+reiss-EMR18.pdf
+\end{References}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{DVDtest}{DVDtest}}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{DVDtest}{Difference between Varying Distributions Test (DVDtest)}{DVDtest}
+\keyword{minp}{DVDtest}
+\keyword{permutation}{DVDtest}
+%
+\begin{Description}\relax
+Testing the difference of two varying distributions.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+DVDtest(ydata1, ydata2, nperm, eval.index.grid, dist.method = "wass",
+  mgcv.gam = TRUE, ..., exclude = NULL, permadj = FALSE,
+  mc.cores = 1)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{ydata1}] a \code{data.frame} or a \code{list} of \code{data.frame} containing 
+at least 3 columns called '\code{.obs}','\code{.index}','\code{.value}' which 
+specify which curve the point belongs to (\code{.obs}) at which ('\code{.index}') 
+it was observed and the observed value (\code{'.value'}). Other variables are 
+available for modelling the varying distribution as well.
+
+\item[\code{ydata2}] same type as \code{ydata1}. If the type of \code{ydata1} and \code{ydata2}
+is a \code{list} of \code{data.frame}, the lenghs of two lists must be the same.
+
+\item[\code{nperm}] a scalar, number of permutation
+
+\item[\code{eval.index.grid}] a vector, evaluation grid of \code{.index}
+
+\item[\code{dist.method}] the methods, Wasserstein(\code{'wass'}), L2(\code{L2}), 
+L1(\code{'L1'}) and Hellinger(\code{'Hellinger'}) to calculate the distances between 
+distributions. Defaults to \code{'wass'}.
+
+\item[\code{mgcv.gam}] a logical variable, whether to apply \code{mgcv::gam} for eastimating 
+distributions, whose parameters are a smooth function of a continuous variable. If 
+\code{FALSE}, \code{gamlss::gamlss} is adopted.
+
+\item[\code{...}] If \code{mgcv.gam = TRUE}, \code{...} should include \code{formula} and 
+\code{family}(=\code{gaulss()}) and other arguments in \code{mgcv::gam}. Otherwise, 
+the arguments in gamlss::gamlss are included.
+
+\item[\code{exclude}] works only in the case of \code{mgcv.gam = TRUE}, to exclude the random effect
+
+\item[\code{permadj}] a logical variable, whether to adjust the permutated data to cover the entire range,
+esp. working in case of sparsity. Defaults to \code{FALSE}
+
+\item[\code{mc.cores}] the same argument in \code{mclapply} (not work on Windows). Defaults to 1.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+This is the Details section
+\end{Details}
+%
+\begin{Value}
+.indexa vector, evaluation grid 
+\end{Value}
+%
+\begin{Note}\relax
+\begin{itemize}
+
+\item If \code{mgcv.gam} is TRUE and \code{exclue} is NULL (default settings), 
+then \code{formula. <- list(.value\textasciitilde{}s(.index)+s(.obs, bs="re"), \textasciitilde{}s(.index))} and 
+\code{exclude. <- "s(.obs)"}
+
+\end{itemize}
+
+\end{Note}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+%
+\begin{References}\relax
+reiss-EMR18.pdf
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+ p=6
+ mu1<-function(t) 0.2*(p-1)*sin(pi*t)+t+1
+ mu2<-function(t) -0.2*(p-1)*sin(pi*t)+t+1
+ sig1 <- function(t) t+1
+ sig2 <- sig1
+ nperson=10
+ fun1<-function(t) rnorm(nperson,mu1(t),sig1(t))
+ fun2<-function(t) rnorm(nperson,mu2(t),sig2(t))
+ tp<-seq(0,1,,10)
+ data1<-sapply(tp,fun1)
+ data2<-sapply(tp,fun2)
+ 
+ library(reshape2)
+ colnames(data1)<-tp
+ dg1<-melt(data1)
+ colnames(dg1)<-c('.obs','.index','.value')
+ dg1$.obs<-as.factor(dg1$.obs)
+ 
+ colnames(data2)<-tp
+ rownames(data2)<-1:nperson+2*nperson
+ dg2<-melt(data2)
+ colnames(dg2)<-c('.obs','.index','.value')
+ dg2$.obs<-as.factor(dg2$.obs)
+ # library(ggplot2)
+ # ggplot()+geom_line(data=dg1,aes(x=.index,y=.value,col=factor(.obs)))+
+ #   geom_line(data=dg2,aes(x=.index,y=.value,col=factor(.obs)))
+
+ ngrid=50
+ ev.grid <- seq(0, 1, , ngrid)
+ nperm. <- 50
+ 
+ simu.test<-DVDtest(dg1,dg2,nperm.,ev.grid)
+ 
+ #ggplot(data.frame(simu.test),aes(x=.index,y=pval))+geom_line()+
+ # geom_hline(yintercept=0.05,linetype=2,col="red")
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get.params}{Fitting the generalized gamma (Pearson type III) distribution for each k}{get.params}
+%
+\begin{Description}\relax
+Fitting by the permuted-data distances
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.params(k, nperm, permarray, eval.index.grid)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{k}] a scalar, \code{k}th data.frame in \code{ydata1\&2}
+
+\item[\code{nperm}] a scalar, number of permutation
+
+\item[\code{permarray}] an array, permuted-data distances from \code{wass\_perm}
+
+\item[\code{eval.index.grid}] a vector, evaluation grid of \code{.index}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+\begin{ldescription}
+\item[\code{mu}] a vector of mean\end{ldescription}
+, \begin{ldescription}
+\item[\code{sigma}] a vector of sigma\end{ldescription}
+, 
+\begin{ldescription}
+\item[\code{nu}] a vector of nu\end{ldescription}
+, \begin{ldescription}
+\item[\code{aic}] the Akaike information criterion in \code{gamlss}
+\end{ldescription}
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{get\_params}{get.Rul.params}}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{get.pval}{Calculate the corrected P values}{get.pval}
+%
+\begin{Description}\relax
+Calculate the corrected P values
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.pval(permarray, param.array, realdists, nroi, eval.index.grid, nperm)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{permarray}] an array, permuted-data distances from \code{wass\_perm}
+
+\item[\code{param.array}] an array, permuted-data distances from \code{get\_params}
+
+\item[\code{realdists}] a matrix or vector, the value from \code{get\_realdist}
+
+\item[\code{nroi}] a scalar, the length of \code{ydata1}
+
+\item[\code{eval.index.grid}] a vector, evaluation grid of \code{.index}
+
+\item[\code{nperm}] a scalar, number of permutation
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector or matrix of p value
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{DVDtest}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{get.realdist}{Calculating the distances under the null hypothesis for each roi}{get.realdist}
+%
+\begin{Description}\relax
+Calculating the distances under the null hypothesis for each roi
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.realdist(k, vdFun, ydata1, ydata2, ind.grid, ..., excl, dist.method)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{k}] a scalar, \code{k}th data.frame in \code{ydata1\&2}
+
+\item[\code{vdFun}] a function, \code{gam} or \code{gamlss}, for fitting the varying distributions
+
+\item[\code{ydata1}] see \code{DVDtest}
+
+\item[\code{ydata2}] see \code{DVDtest}
+
+\item[\code{ind.grid}] see \code{eval.index.grid} in \code{DVDtest}
+
+\item[\code{...}] arguments of \code{vdFun}
+
+\item[\code{excl}] an argument of \code{predict} for \code{gam}
+
+\item[\code{dist.method}] see \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector of the distances
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{DVDtest}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{get\_params}{Fitting the generalized gamma (Pearson type III) distribution}{get.Rul.params}
+%
+\begin{Description}\relax
+Fitting the generalized gamma (Pearson type III) distribution
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get_params(nroi, nperm, permarray, eval.index.grid)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{nroi}] a scalar, the length of \code{ydata1} or \code{ydata2}
+
+\item[\code{nperm}] a scalar, number of permutation
+
+\item[\code{permarray}] an array, permuted-data distances from \code{wass\_perm}
+
+\item[\code{eval.index.grid}] a vector, evaluation grid of \code{.index}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+an array, \code{param.array}
+\end{Value}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{DVDtest}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{get\_realdist}{Calculating the distances under the null hypothesis}{get.Rul.realdist}
+%
+\begin{Description}\relax
+Calculating the distances under the null hypothesis
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get_realdist(vdFun, ydata1, ydata2, ind.grid, ..., excl, mc.cores,
+  dist.method)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{vdFun}] a function, \code{gam} or \code{gamlss}, for fitting the varying distributions
+
+\item[\code{ydata1}] see \code{DVDtest}
+
+\item[\code{ydata2}] see \code{DVDtest}
+
+\item[\code{ind.grid}] see \code{eval.index.grid} in \code{DVDtest}
+
+\item[\code{...}] arguments of \code{vdFun}
+
+\item[\code{excl}] an argument of \code{predict} for \code{gam}
+
+\item[\code{mc.cores}] a scalar, an argument in \code{mclapply}
+
+\item[\code{dist.method}] see \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector or matrix of the distances
+\end{Value}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{DVDtest}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{make.perms}{Making permutated index}{make.perms}
+%
+\begin{Description}\relax
+Making permutated index
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+make.perms(dat1, dat2, nperm, .index, adj)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{dat1}] an element of \code{ydata1}
+
+\item[\code{dat2}] an element of \code{ydata2}
+
+\item[\code{nperm}] a scalar, number of permutation
+
+\item[\code{.index}] see \code{eval.index.grid} in \code{DVDtest}
+
+\item[\code{adj}] see \code{permadj} in \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a matrix, permuted indices
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{DVDtest}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{multiwass}{Calculating the distances between two gam/gamlss objects}{multiwass}
+%
+\begin{Description}\relax
+Calculating the distances between two gam/gamlss objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+multiwass(obj1, obj2, newdata1, newdata2, dist.method, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{obj1}] a gam/gamlss object
+
+\item[\code{obj2}] another gam/gamlss object
+
+\item[\code{newdata1}] related evaluation grids
+
+\item[\code{newdata2}] related evaluation grids
+
+\item[\code{dist.method}] see \code{DVDtest}
+
+\item[\code{...}] partial arguments in \code{predict}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector, distances
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+\inputencoding{utf8}
+\HeaderA{params2qfunc}{Getting the quantile/density function via parameters}{params2qfunc}
+%
+\begin{Description}\relax
+Getting the quantile/density function via parameters
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+params2qfunc(params, family, dist.method)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{params}] a vector, parameters for certain distributions
+
+\item[\code{family}] a specific distribution from \code{gam} or \code{gamlss}
+
+\item[\code{dist.method}] see \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+quantile or density functions
+\end{Value}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+\inputencoding{utf8}
+\HeaderA{qfuncs2wass2}{Distance functions}{qfuncs2wass2}
+%
+\begin{Description}\relax
+Distance functions
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+qfuncs2wass2(qfunc1, qfunc2, dist.method = dist.method, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{qfunc1}] quantile or density functions from \code{params2qfunc}
+
+\item[\code{qfunc2}] quantile or density functions from \code{params2qfunc}
+
+\item[\code{dist.method}] see \code{DVDtest}
+
+\item[\code{...}] extra arguments in \code{integrate}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+distance functions
+\end{Value}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+\inputencoding{utf8}
+\HeaderA{wass.perm}{Calculating the distances via permuted data for each \code{k}}{wass.perm}
+%
+\begin{Description}\relax
+Calculating the distances via permuted data for each \code{k}
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+wass.perm(k, vdFun, dat1, dat2, ..., permat, .index, report.every = 10,
+  exclude, dist.method)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{k}] a scalar, \code{k}th \code{data.frame} of \code{ydata1\&2}
+
+\item[\code{vdFun}] a function, \code{gam} or \code{gamlss}, for fitting the varying distributions
+
+\item[\code{dat1}] \code{k}th \code{data.frame} of \code{ydata1}
+
+\item[\code{dat2}] \code{k}th \code{data.frame} of \code{ydata2}
+
+\item[\code{...}] arguments of \code{vdFun}
+
+\item[\code{permat}] a result of \code{make.perm}
+
+\item[\code{.index}] see \code{eval.index.grid} in \code{DVDtest}
+
+\item[\code{report.every}] a scalar, reporting the number permutation
+
+\item[\code{exclude}] an argument of \code{predict}
+
+\item[\code{dist.method}] see \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a matrix of permuted-data distances
+\end{Value}
+%
+\begin{Author}\relax
+Philip Reiss, Meng Xu
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{wass\_perm}
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{wass\_perm}{Calculating the distances via permuted data}{wass.Rul.perm}
+%
+\begin{Description}\relax
+Calculating the distances via permuted data
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+wass_perm(vdFun, nperm, ydata1, ydata2, eval.index.grid, permat, ...,
+  exclude, mc.cores, dist.method)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{vdFun}] a function, \code{gam} or \code{gamlss}, for fitting the varying distributions
+
+\item[\code{nperm}] a scalar, number of permutation
+
+\item[\code{ydata1}] see \code{DVDtest}
+
+\item[\code{ydata2}] see \code{DVDtest}
+
+\item[\code{eval.index.grid}] see \code{DVDtest}
+
+\item[\code{permat}] a result of \code{make.perm}
+
+\item[\code{...}] partial arguments of \code{vdFun}
+
+\item[\code{exclude}] an argument of \code{predict}
+
+\item[\code{mc.cores}] a scalar, an argument of \code{mclapply}
+
+\item[\code{dist.method}] see \code{DVDtest}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+an array of distances
+\end{Value}
+%
+\begin{Author}\relax
+Meng Xu, Philip Reiss
+\end{Author}
+%
+\begin{SeeAlso}\relax
+\code{wass.perm}
+\end{SeeAlso}
+\printindex{}
+\end{document}

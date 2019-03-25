@@ -1,0 +1,9 @@
+This is makeindex, version 2.15 [TeX Live 2018/W32TeX] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (17 entries accepted, 0 rejected).
+Sorting entries....done (65 comparisons).
+Generating output file Rd2.ind....
+## Warning (input = Rd2.idx, line = 3; output = Rd2.ind, line = 10):
+   -- Conflicting entries: multiple encaps for the same page under same key.
+done (41 lines written, 1 warning).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
