@@ -7,8 +7,9 @@
 #' @param ydata1 a \code{data.frame} or a \code{list} of \code{data.frame}, containing 
 #' at least 3 columns called '\code{.obs}', '\code{.index}' and '\code{.value}' which 
 #' specify which curve the point belongs to (\code{.obs}) at which ('\code{.index}') 
-#' it was observed and the observed value (\code{'.value'}). Other columns are 
-#' available as well for modelling the varying distributions.
+#' it was observed and the observed value (\code{'.value'}). See details in the package 
+#' \code{refund}. Other columns are available as well for modelling the varying 
+#' distributions.
 #' @param ydata2 same as \code{ydata1}. 
 #' @param nperm a scalar, number of permutation
 #' @param grid a vector, evaluation grids of \code{.index}
@@ -30,10 +31,10 @@
 #' (not available on Windows unless \code{mc.cores = 1}). Defaults to \code{1}.
 #' @return 
 #' \item{.index}{a vector, evaluation grids}
-#' \item{pval}{a vector or matrix of p values}
+#' \item{pval}{a vector or matrix of (corrected) p values}
 #' @note 
 #' \itemize{
-#' \item If the types of \code{ydata1} and \code{ydata2} are \code{list} of 
+#' \item If \code{ydata1} and \code{ydata2} are \code{list}s of 
 #' \code{data.frame}s, the lenghs of two lists must be the same.
 #' 
 #' \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
@@ -79,7 +80,7 @@
 #'  ev.grid <- seq(0, 1, , ngrid)
 #'  nperm. <- 50
 #'  
-#'  ####
+#' ####
 #'  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
 #'  
 #'  #ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
