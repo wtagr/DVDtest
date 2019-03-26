@@ -63,7 +63,7 @@ DVDplot <-
         geom_line(data=pl2,aes(x=.index,y = mn+1.96*std),size=0.2,color="blue",linetype=3)+
         geom_ribbon(data=pl2,aes(x=.index,ymin=mn-1.96*std,ymax=mn+1.96*std),alpha=0.1,
                     fill="blue")+
-        labs(title = paste0(kname,roi),y=kylab,x=kxlab)+
+        labs(title = paste0(kname,i),y=kylab,x=kxlab)+
         scale_alpha_continuous(range = c(.8, 0))+
         theme(legend.position="bottom")
     }

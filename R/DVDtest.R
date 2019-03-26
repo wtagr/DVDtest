@@ -28,7 +28,8 @@
 #' @param permadj a logical variable, whether to adjust the permutated data to cover 
 #' the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
-#' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}.
+#' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}. 
+#' See extra info in Note.
 #' @return 
 #' \item{.index}{a vector, evaluation grids.}
 #' \item{pval}{a vector or matrix of (corrected) p values.}
@@ -43,9 +44,12 @@
 #' \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 #' and \code{exclude <- "s(.obs)"}, repectively.
 #' 
-#' \item Now Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
-#' gamlss::gamlss are supported by \code{DVDtest} for fitting a GAMLSS. 
-#' Please contact the maintainer for further supporting.
+#' \item Multicore calculation is dealing with the long list of \code{data.frame} 
+#' rather than the permutation.
+#' 
+#' \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
+#' gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
+#' Please contact the maintainer if need further supporting.
 #' }
 #' @author Meng Xu, Philip Reiss
 #' @references reiss-EMR18.pdf

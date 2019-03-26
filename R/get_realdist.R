@@ -40,6 +40,6 @@ function(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method){
       realdists[,i] <- real.list[[i]]$rlist
       vd_param[[i]] <- real.list[[i]]$vd.param
     }
-    return(list(realdists=realdists,vd_param=vd_param))
+    return(list(realdists=realdists,vdparam=vd_param))
   }
 }
