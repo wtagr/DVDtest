@@ -30,8 +30,9 @@
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
 #' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}.
 #' @return 
-#' \item{.index}{a vector, evaluation grids}
-#' \item{pval}{a vector or matrix of (corrected) p values}
+#' \item{.index}{a vector, evaluation grids.}
+#' \item{pval}{a vector or matrix of (corrected) p values.}
+#' \item{vdparam}{a list of paramters of varying distributions.}
 #' @note 
 #' \itemize{
 #' \item If \code{ydata1} and \code{ydata2} are \code{list}s of 
@@ -86,9 +87,8 @@
 #'  
 #' ####
 #'  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
-#'  
-#'  # ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
-#'  # + geom_hline(yintercept = 0.05, linetype = 2, col = "red")
+#'  DVDplot(simu.test)
+
 
 
 DVDtest <-
@@ -114,9 +114,11 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
   
   nroi <- length(ydata1)
   permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj)
-  realdists <- get_realdist(vdFun = vdFun, ydata1 = ydata1, ydata2 = ydata2,
+  reald <- get_realdist(vdFun = vdFun, ydata1 = ydata1, ydata2 = ydata2,
                           grid = grid,..., excl = exclude, 
                           mc.cores = mc.cores, dist.method = dist.method)
+  realdists<-reald$realdists
+  vdparam<-reald$vdparam
   permarray <- wass_perm(vdFun = vdFun, nperm = nperm, ydata1 = ydata1, ydata2 = ydata2,...,
                        grid = grid, permat = permat.all, exclude = exclude,
                        mc.cores = mc.cores, dist.method = dist.method)
@@ -125,5 +127,5 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
   # Raw p-values (p.real, p.perm)
   p.mat <- get.pval(permarray = permarray, param.array = param.array, realdists = realdists,
                     nroi=nroi, grid = grid, nperm = nperm)
-  return(list(.index = grid, pval = p.mat))
+  return(list(.index = grid, pval = p.mat, vdparam = vdparam))
 }

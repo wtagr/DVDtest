@@ -9,7 +9,7 @@
 #' @param \dots arguments of \code{vdFun}
 #' @param excl an argument of \code{predict} for \code{gam}
 #' @param dist.method see \code{DVDtest}
-#' @return a vector of the distances
+#' @return a vector of the distances and parameters of varying distributions
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{\link{DVDtest}}
 #' @import mgcv
@@ -33,8 +33,8 @@ function(k, vdFun, ydata1, ydata2, grid,
     g2 <- vdFun(data=ydata2[[k]],...)
     }
   
-  multiwass(g1, g2, newdata1=
-              data.frame(.index=grid, .obs=ydata1[[k]]$.obs[1]),
+  rlist <- multiwass(g1, g2, newdata1 = data.frame(.index=grid, .obs=ydata1[[k]]$.obs[1]),
             newdata2 = data.frame(.index = grid, .obs = ydata2[[k]]$.obs[1]),
             excl = excl, dist.method = dist.method)
+  return(list(rlist=rlist$wvec, vd.param=rlist$pred))
 }

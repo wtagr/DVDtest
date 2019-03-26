@@ -24,7 +24,8 @@ get_realdist(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method)
 \item{dist.method}{see \code{DVDtest}}
 }
 \value{
-a vector or matrix of the distances
+a vector or matrix of the distances and list of parameters of varying 
+distributions.
 }
 \description{
 Calculating the distances under the null hypothesis

@@ -51,7 +51,7 @@ function(k, vdFun, dat1, dat2, ..., permat, .index,
     
     if (inherits(g1.p, "try-error") || inherits(g2.p, "try-error")) nerror <- nerror + 1
     else permdists[i, ] <- multiwass(g1.p, g2.p, newdata1=data.frame(.index=.index, .obs=perm1$.obs[1]), newdata2=data.frame(.index=.index, .obs=perm2$.obs[1]),
-                                     dist.method = dist.method, exclude=exclude) 
+                                     dist.method = dist.method, exclude=exclude)$wvec 
   }
   # list(.index=.index, nperm=nperm, nerror=nerror, permdists=permdists)
   return(permdists)

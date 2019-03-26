@@ -24,7 +24,7 @@ get.realdist(k, vdFun, ydata1, ydata2, grid, ..., excl, dist.method)
 \item{dist.method}{see \code{DVDtest}}
 }
 \value{
-a vector of the distances
+a vector of the distances and parameters of varying distributions
 }
 \description{
 Calculating the distances under the null hypothesis for each k

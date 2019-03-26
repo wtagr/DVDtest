@@ -33,5 +33,5 @@ function(obj1, obj2, newdata1, newdata2, dist.method, ...) {
     wvec[k] <- qfuncs2wass2(qf1, qf2, dist.method = dist.method)
   }
   if (NCOL(newdata1) == 1) names(wvec) = newdata1[,1]
-  wvec  # can we make this a *named* vector?
+  return(list(wvec = wvec,pred = list(pred1=pred1,pred2=pred2)))  # can we make this a *named* vector?
 }

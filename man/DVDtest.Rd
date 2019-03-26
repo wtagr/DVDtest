@@ -45,8 +45,9 @@ the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}.}
 }
 \value{
-\item{.index}{a vector, evaluation grids}
-\item{pval}{a vector or matrix of (corrected) p values}
+\item{.index}{a vector, evaluation grids.}
+\item{pval}{a vector or matrix of (corrected) p values.}
+\item{vdparam}{a list of paramters of varying distributions.}
 }
 \description{
 Testing the difference of two varying distributions.
@@ -105,9 +106,7 @@ Please contact the maintainer for further supporting.
  
 ####
  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
- 
- # ggplot(data.frame(simu.test), aes(x = .index, y = pval)) + geom_line()
- # + geom_hline(yintercept = 0.05, linetype = 2, col = "red")
+ DVDplot(simu.test)
 }
 \references{
 reiss-EMR18.pdf
