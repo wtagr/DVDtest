@@ -106,7 +106,9 @@ Please contact the maintainer for further supporting.
  
 ####
  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
- DVDplot(simu.test)
+ simu.figs <- DVDplot(simu.test)
+ simu.figs$pfig
+ simu.figs$kfig[[1]]
 }
 \references{
 reiss-EMR18.pdf

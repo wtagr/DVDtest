@@ -87,7 +87,9 @@
 #'  
 #' ####
 #'  simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
-#'  DVDplot(simu.test)
+#'  simu.figs <- DVDplot(simu.test)
+#'  simu.figs$pfig
+#'  simu.figs$kfig[[1]]
 
 
 

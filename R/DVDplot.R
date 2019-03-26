@@ -2,7 +2,12 @@
 #' 
 #' Plot a list of the DVDtest-related figures via \code{ggplot2}
 #' 
-#' This is the Details section
+#' Fig \code{pfig} illustrates a collection of the p value curves among all \code{k}.
+#' Fig \code{kfig} illustrates a collection list of the figures with varying distributions among all 
+#' \code{k}, highlighted the zones of small p values in dark, where \code{ydata1} and 
+#' \code{ydata2} mark as red and blue, repectively. The dashed and dotted lines denote the smooth mean function and +/- 2 
+#' sigma, respectively.
+#' 
 #' 
 #' 
 #' @param tobj a return test object of \code{\link{DVDtest}}
@@ -12,6 +17,7 @@
 #' 
 #' @return a list of ggplot objects on p value curves and varying distributions
 #' @author Meng Xu
+#' @note Please contact the maintainer if need more details.
 #' @references reiss-EMR18.pdf
 #' @keywords ggplot
 #' @export
@@ -61,5 +67,5 @@ DVDplot <-
         scale_alpha_continuous(range = c(.8, 0))+
         theme(legend.position="bottom")
     }
-    return(list(pfig = pfig, kfig = kfig))
+    return(list(pfig = pfig, kfig=kfig))
   }
