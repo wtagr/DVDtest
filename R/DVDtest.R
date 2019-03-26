@@ -71,15 +71,12 @@
 #'  data2 <- sapply(tp,fun2)
 #'  
 #'  library(reshape2)
-#'  colnames(data1) <- tp
-#'  dg1 <- melt(data1)
-#'  colnames(dg1) <- c('.obs','.index','.value')
-#'  dg1$.obs <- as.factor(dg1$.obs)
-#'  
-#'  colnames(data2) <- tp
+#'  colnames(data2) <- colnames(data1) <- tp
 #'  rownames(data2) <- 1:nperson+2*nperson
+#'  dg1 <- melt(data1)
 #'  dg2 <- melt(data2)
-#'  colnames(dg2) <- c('.obs','.index','.value')
+#'  colnames(dg1) <- colnames(dg2) <- c('.obs','.index','.value')
+#'  dg1$.obs <- as.factor(dg1$.obs)
 #'  dg2$.obs <- as.factor(dg2$.obs)
 #'  # library(ggplot2)
 #'  # ggplot() + geom_line(data = dg1, aes(x = .index,y = .value, col = factor(.obs)))
