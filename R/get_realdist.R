@@ -7,7 +7,6 @@
 #' @param grid see in \code{DVDtest}
 #' @param \dots arguments of \code{vdFun}
 #' @param excl an argument of \code{predict} for \code{gam}
-#' @param mc.cores a scalar, an argument in \code{mclapply}
 #' @param dist.method see \code{DVDtest}
 #' @return a vector or matrix of the distances and list of parameters of varying 
 #' distributions.
@@ -21,9 +20,9 @@ get_realdist <-
   function(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method){
     vd_param <- list()
     realdists <- matrix(NA, length(grid), length(ydata1))
-    real.list <- mclapply(1:length(ydata1), get.realdist, vdFun = vdFun,
+    real.list <- lapply(1:length(ydata1), get.realdist, vdFun = vdFun,
                           ydata1 = ydata1, ydata2 = ydata2,
-                          grid = grid, ..., excl = excl, mc.cores = mc.cores, 
+                          grid = grid, ..., excl = excl, 
                           dist.method = dist.method)
     for (i in 1:length(ydata1)) {
       realdists[,i] <- real.list[[i]]$rlist

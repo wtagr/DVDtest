@@ -117,8 +117,7 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
   nroi <- length(ydata1)
   permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj)
   reald <- get_realdist(vdFun = vdFun, ydata1 = ydata1, ydata2 = ydata2,
-                          grid = grid,..., excl = exclude, 
-                          mc.cores = mc.cores, dist.method = dist.method)
+                          grid = grid,..., excl = exclude, dist.method = dist.method)
   realdists<-reald$realdists
   vdparam<-reald$vdparam
   permarray <- wass_perm(vdFun = vdFun, nperm = nperm, ydata1 = ydata1, ydata2 = ydata2,...,
