@@ -4,29 +4,26 @@
 \alias{wass.perm}
 \title{Calculating the distances via permuted data for each k}
 \usage{
-wass.perm(k, vdFun, dat1, dat2, ..., permat, .index, report.every = 10,
-  exclude, dist.method)
+wass.perm(np, vdFun, ydat1, ydat2, ..., permat, grid, exclude, dist.method)
 }
 \arguments{
-\item{k}{a scalar, \code{k}th \code{data.frame} of \code{ydata1&2}}
-
 \item{vdFun}{a function, \code{gam} or \code{gamlss}, for fitting the varying distributions}
-
-\item{dat1}{\code{k}th \code{data.frame} of \code{ydata1}}
-
-\item{dat2}{\code{k}th \code{data.frame} of \code{ydata2}}
 
 \item{\dots}{arguments of \code{vdFun}}
 
 \item{permat}{a result of \code{make.perm}}
 
-\item{.index}{see \code{grid} in \code{DVDtest}}
-
-\item{report.every}{a scalar, reporting the number permutation}
+\item{grid}{see \code{grid} in \code{DVDtest}}
 
 \item{exclude}{an argument of \code{predict}}
 
 \item{dist.method}{see \code{DVDtest}}
+
+\item{k}{a scalar, \code{k}th \code{data.frame} of \code{ydata1&2}}
+
+\item{dat1}{\code{k}th \code{data.frame} of \code{ydata1}}
+
+\item{dat2}{\code{k}th \code{data.frame} of \code{ydata2}}
 }
 \value{
 a matrix of permuted-data distances

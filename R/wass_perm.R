@@ -21,32 +21,15 @@
 #' @keywords internal
 
 wass_perm <-
-function(vdFun, nperm, ydata1, ydata2, grid, permat, ..., exclude,
-                    mc.cores, dist.method){
-
-  permarray <- array(dim = c(nperm, length(grid), length(ydata1)))
-  if (mc.cores == 1) {
-    permtmp <- lapply(1:length(ydata1), wass.perm, vdFun = vdFun, dat1 = ydata1,
-                      dat2 = ydata2, ..., permat = permat, .index = grid, 
-                      report.every = 10, exclude = exclude, dist.method = dist.method)
-  for (k in 1:length(ydata1)) permarray[,,k] <- permtmp[[k]]
-  return(permarray)
-  }
-  if (mc.cores != 1) {
-    permtmp <- mclapply(1:length(ydata1), wass.perm, vdFun = vdFun, dat1 = ydata1, 
-                        dat2 = ydata2, ..., permat=permat, .index=grid, 
-                        report.every = 10, exclude = exclude, mc.cores = mc.cores, 
+  function(vdFun, nperm, ydata1, ydata2, grid, permat, ..., exclude,
+           mc.cores, dist.method){
+    
+    permarray <- array(dim = c(nperm, length(grid), length(ydata1)))
+    
+    permtmp <- mclapply(1:nperm, wass.perm, vdFun = vdFun, ydat1 = ydata1, 
+                        ydat2 = ydata2, ..., permat=permat, grid=grid,
+                        exclude = exclude, mc.cores = mc.cores, 
                         dist.method = dist.method)
-    for (k in 1:length(ydata1)) permarray[,,k] <- permtmp[[k]]
+    for (k in 1:nperm) permarray[k,,] <- permtmp[[k]]
     return(permarray)
-    }
-  # permarray=array(dim=c(nperm,length(grid),
-  #                       length(ydata1)))
-  # for (k in 1:length(ydata1)){
-  #   permarray[,,k]<-wass.perm(k,vdFun=vdFun,dat1=ydata1[[k]], dat2=ydata2[[k]],
-  #                             ...,
-  #                             permat=permat.all, .index=grid,
-  #                             report.every=10, exclude=exclude)
-  # }
-  # return(permarray)
-}
+  }

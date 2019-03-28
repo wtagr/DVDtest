@@ -44,8 +44,7 @@
 #' \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 #' and \code{exclude <- "s(.obs)"}, repectively.
 #' 
-#' \item Multicore calculation is dealing with the long list of \code{data.frame} 
-#' rather than the permutation.
+#' \item Multicore calculation is dealing with the permutation.
 #' 
 #' \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
 #' gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 

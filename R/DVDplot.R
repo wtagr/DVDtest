@@ -32,7 +32,7 @@ DVDplot <-
     p.dft<-as.data.frame(tobj$pval)
     p.dft$.index<-tobj$.index
     p.df<-melt(p.dft, id.var=".index")
-    pfig <- ggplot(p.df, aes(x=.index,y=value,group=variable,colour=variable))+
+    pfig <- ggplot(p.df, aes_(x=~.index,y=~value,group=~variable,colour=~variable))+
       geom_line(show.legend = FALSE)+
       geom_hline(yintercept = 0.05, linetype = 2, col = "red")+
       labs(y = "p value", x = kxlab)
@@ -47,21 +47,21 @@ DVDplot <-
       pl2<-data.frame(.index = tobj$.index, mn=tobj$vdparam[[i]]$pred2$mu,
                        std=tobj$vdparam[[i]]$pred2$sigma,
                        pval=tobj$pval[,i])
-      kfig[[i]]=ggplot()+geom_line(data=pl1,aes(x=.index,y = mn,alpha=pval),size=2,color="red")+
-        geom_line(data=pl1,aes(x=.index,y = mn),size=0.2,color="red",linetype=2)+
-        geom_line(data=pl1,aes(x=.index,y = mn-1.96*std,alpha=pval),size=0.5,color="red")+
-        geom_line(data=pl1,aes(x=.index,y = mn-1.96*std),size=0.2,color="red",linetype=3)+
-        geom_line(data=pl1,aes(x=.index,y = mn+1.96*std,alpha=pval),size=0.5,color="red")+
-        geom_line(data=pl1,aes(x=.index,y = mn+1.96*std),size=0.2,color="red",linetype=3)+
-        geom_ribbon(data=pl1,aes(x=.index,ymin=mn-1.96*std,ymax=mn+1.96*std),alpha=0.1,
+      kfig[[i]]=ggplot()+geom_line(data=pl1,aes_(x=~.index,y = ~mn,alpha=~pval),size=2,color="red")+
+        geom_line(data=pl1,aes_(x=~.index,y = ~mn),size=0.2,color="red",linetype=2)+
+        geom_line(data=pl1,aes_(x=~.index,y =~(mn-1.96*std),alpha=~pval),size=0.5,color="red")+
+        geom_line(data=pl1,aes_(x=~.index,y =~(mn-1.96*std)),size=0.2,color="red",linetype=3)+
+        geom_line(data=pl1,aes_(x=~.index,y =~(mn+1.96*std),alpha=~pval),size=0.5,color="red")+
+        geom_line(data=pl1,aes_(x=~.index,y =~(mn+1.96*std)),size=0.2,color="red",linetype=3)+
+        geom_ribbon(data=pl1,aes_(x=~.index,ymin=~(mn-1.96*std),ymax=~(mn+1.96*std)),alpha=0.1,
                     fill="red")+
-        geom_line(data=pl2,aes(x=.index,y = mn,alpha=pval),size=2,color="blue")+
-        geom_line(data=pl2,aes(x=.index,y = mn),size=0.2,color="blue",linetype=2)+
-        geom_line(data=pl2,aes(x=.index,y = mn-1.96*std,alpha=pval),size=0.5,color="blue")+
-        geom_line(data=pl2,aes(x=.index,y = mn-1.96*std),size=0.2,color="blue",linetype=3)+
-        geom_line(data=pl2,aes(x=.index,y = mn+1.96*std,alpha=pval),size=0.5,color="blue")+
-        geom_line(data=pl2,aes(x=.index,y = mn+1.96*std),size=0.2,color="blue",linetype=3)+
-        geom_ribbon(data=pl2,aes(x=.index,ymin=mn-1.96*std,ymax=mn+1.96*std),alpha=0.1,
+        geom_line(data=pl2,aes_(x=~.index,y = ~mn,alpha=~pval),size=2,color="blue")+
+        geom_line(data=pl2,aes_(x=~.index,y = ~mn),size=0.2,color="blue",linetype=2)+
+        geom_line(data=pl2,aes_(x=~.index,y = ~(mn-1.96*std),alpha=~pval),size=0.5,color="blue")+
+        geom_line(data=pl2,aes_(x=~.index,y =~(mn-1.96*std)),size=0.2,color="blue",linetype=3)+
+        geom_line(data=pl2,aes_(x=~.index,y = ~(mn+1.96*std),alpha=~pval),size=0.5,color="blue")+
+        geom_line(data=pl2,aes_(x=~.index,y =~(mn+1.96*std)),size=0.2,color="blue",linetype=3)+
+        geom_ribbon(data=pl2,aes_(x=~.index,ymin=~(mn-1.96*std),ymax=~(mn+1.96*std)),alpha=0.1,
                     fill="blue")+
         labs(title = paste0(kname,i),y=kylab,x=kxlab)+
         scale_alpha_continuous(range = c(.8, 0))+
