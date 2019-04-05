@@ -17,8 +17,9 @@ function(params, family, dist.method) {
     if ("gaulss" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
     else if ("NO" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
     else {
-      qfun. <- match.fun(family[1])
-      qfun <- paste0("q",qfun.)
+      
+      qfun. <- paste0("q",family[1])
+      qfun <- match.fun(qfun)
       return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
     }
   }
@@ -27,8 +28,9 @@ function(params, family, dist.method) {
     if ("gaulss" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
     else if ("NO" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
     else {
-      pfun. <- match.fun(family[1])
-      pfun <- paste0("d",pfun.)
+      
+      pfun. <- paste0("d",family[1])
+      pfun <- match.fun(qfun.)
       return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu, tau=tau))
     }
   }
