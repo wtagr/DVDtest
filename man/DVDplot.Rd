@@ -4,7 +4,8 @@
 \alias{DVDplot}
 \title{Plotting DVDtest}
 \usage{
-DVDplot(tobj, kxlab = NULL, kylab = NULL, kname = NULL)
+DVDplot(tobj, kxlab = NULL, kylab = NULL, kname = NULL,
+  thhd = 0.05)
 }
 \arguments{
 \item{tobj}{a return test object of \code{\link{DVDtest}}}
@@ -14,6 +15,8 @@ DVDplot(tobj, kxlab = NULL, kylab = NULL, kname = NULL)
 \item{kylab}{a title for the y axis, \code{.value}}
 
 \item{kname}{a name for \code{k}, e.g. ROI in the references}
+
+\item{thhd}{a number to mark out the zone of the p-value of interest. Defaults to 0.05}
 }
 \value{
 a list of ggplot objects on p value curves and varying distributions

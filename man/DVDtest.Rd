@@ -6,7 +6,7 @@
 \usage{
 DVDtest(ydata1, ydata2, nperm, grid, dist.method = "wass",
   mgcv.gam = TRUE, ..., exclude = NULL, permadj = FALSE,
-  mc.cores = 1)
+  mc.cores = c(1, 1), seeds = NULL)
 }
 \arguments{
 \item{ydata1}{a \code{data.frame} or a \code{list} of \code{data.frame}, containing 
@@ -44,6 +44,8 @@ the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 \item{mc.cores}{passed to \code{mc.cores} inside of \code{mclapply} 
 (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}. 
 See extra info in Note.}
+
+\item{seeds}{set the seed for the permutation via \code{set.seed()}}
 }
 \value{
 \item{.index}{a vector, evaluation grids.}

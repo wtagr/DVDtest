@@ -11,10 +11,11 @@
 #' @seealso \code{DVDtest}
 #' @keywords internal
 make.perms <-
-function(dat1, dat2, nperm, .index, adj) {
+function(dat1, dat2, nperm, .index, adj,seeds) {
   n1 <- length(unique(dat1$.obs))
   n2 <- length(unique(dat2$.obs))
   matt <- matrix(NA,nperm, n1)
+  set.seed(seeds)
   for (i in 1:nperm) {
     bothdat <- rbind(dat1, dat2)
     check <- 0

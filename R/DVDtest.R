@@ -30,6 +30,7 @@
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
 #' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}. 
 #' See extra info in Note.
+#' @param seeds set the seed for the permutation via \code{set.seed()}
 #' @return 
 #' \item{.index}{a vector, evaluation grids.}
 #' \item{pval}{a vector or matrix of (corrected) p values.}
@@ -95,7 +96,7 @@
 
 DVDtest <-
 function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
-               ...,exclude=NULL, permadj=FALSE, mc.cores=1){
+               ...,exclude=NULL, permadj=FALSE, mc.cores=c(1,1),seeds=NULL){
   argmt <- list(...)
   if (!identical(sapply(ydata1,is.list), sapply(ydata2,is.list))) {
     stop('The types of ydata1 and ydata2 are not same')
@@ -115,15 +116,17 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
   if (mgcv.gam) vdFun<-mgcv::gam else vdFun<-gamlss::gamlss
   
   nroi <- length(ydata1)
-  permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj)
+  permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj, seeds = seeds)
   reald <- get_realdist(vdFun = vdFun, ydata1 = ydata1, ydata2 = ydata2,
-                          grid = grid,..., excl = exclude, dist.method = dist.method)
+                          grid = grid,..., excl = exclude, dist.method = dist.method,
+                        mc.cores=mc.cores[2])
   realdists<-reald$realdists
   vdparam<-reald$vdparam
   permarray <- wass_perm(vdFun = vdFun, nperm = nperm, ydata1 = ydata1, ydata2 = ydata2,...,
                        grid = grid, permat = permat.all, exclude = exclude,
-                       mc.cores = mc.cores, dist.method = dist.method)
-  param.array <- get_params(nroi, nperm, permarray, grid)
+                       mc.cores = mc.cores[1], dist.method = dist.method)
+  param.array <- get_params(nroi=nroi, nperm=nperm, permarray=permarray, grid=grid,
+                            mc.cores=mc.cores[2])
   
   # Raw p-values (p.real, p.perm)
   p.mat <- get.pval(permarray = permarray, param.array = param.array, realdists = realdists,

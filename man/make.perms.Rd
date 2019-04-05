@@ -4,7 +4,7 @@
 \alias{make.perms}
 \title{Making permutated index}
 \usage{
-make.perms(dat1, dat2, nperm, .index, adj)
+make.perms(dat1, dat2, nperm, .index, adj, seeds)
 }
 \arguments{
 \item{dat1}{an element of \code{ydata1}}

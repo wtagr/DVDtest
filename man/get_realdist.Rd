@@ -19,6 +19,8 @@ get_realdist(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method)
 
 \item{excl}{an argument of \code{predict} for \code{gam}}
 
+\item{mc.cores}{see the 2nd element of \code{mc.cores} in \code{DVDtest}}
+
 \item{dist.method}{see \code{DVDtest}}
 }
 \value{

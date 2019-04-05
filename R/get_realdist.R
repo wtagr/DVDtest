@@ -8,6 +8,7 @@
 #' @param \dots arguments of \code{vdFun}
 #' @param excl an argument of \code{predict} for \code{gam}
 #' @param dist.method see \code{DVDtest}
+#' @param mc.cores see the 2nd element of \code{mc.cores} in \code{DVDtest}
 #' @return a vector or matrix of the distances and list of parameters of varying 
 #' distributions.
 #' @author Meng Xu, Philip Reiss
@@ -20,10 +21,10 @@ get_realdist <-
   function(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method){
     vd_param <- list()
     realdists <- matrix(NA, length(grid), length(ydata1))
-    real.list <- lapply(1:length(ydata1), get.realdist, vdFun = vdFun,
+    real.list <- mclapply(1:length(ydata1), get.realdist, vdFun = vdFun,
                           ydata1 = ydata1, ydata2 = ydata2,
                           grid = grid, ..., excl = excl, 
-                          dist.method = dist.method)
+                          dist.method = dist.method,mc.cores=mc.cores)
     for (i in 1:length(ydata1)) {
       realdists[,i] <- real.list[[i]]$rlist
       vd_param[[i]] <- real.list[[i]]$vd.param

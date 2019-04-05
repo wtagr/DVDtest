@@ -4,7 +4,7 @@
 \alias{get_params}
 \title{Fitting the generalized gamma (Pearson type III) distribution}
 \usage{
-get_params(nroi, nperm, permarray, grid)
+get_params(nroi, nperm, permarray, grid, mc.cores)
 }
 \arguments{
 \item{nroi}{a scalar, the length of \code{ydata1} or \code{ydata2}}
@@ -14,6 +14,8 @@ get_params(nroi, nperm, permarray, grid)
 \item{permarray}{an array, permuted-data distances from \code{wass_perm}}
 
 \item{grid}{a vector, evaluation grid of \code{.index}}
+
+\item{mc.cores}{a number of the cores using for multi-process}
 }
 \value{
 an array, \code{param.array}
