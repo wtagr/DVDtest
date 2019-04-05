@@ -107,23 +107,25 @@ Please contact the maintainer if need further supporting.
  nperm. <- 50
  
 ####Estimated with mgcv::gam
+ library(mgcv)
  simu.test1 <- DVDtest(dg1, dg2, nperm. ,ev.grid)
 ####Estimated with gamlss::gamlss
-# simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ cs(.index), 
-#                sigma.formula = ~cs(.index), random = ~1|.obs, family = NO, mgcv.gam=F)
+ library(gamlss)
+ simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ cs(.index), 
+               sigma.formula = ~cs(.index), random = ~1|.obs, family = NO, mgcv.gam=FALSE)
 ####Plot
  simu.figs <- DVDplot(simu.test1)
  simu.figs$pfig
  simu.figs$kfig[[1]]
 }
 \references{
-\itemize{
-\item reiss-EMR18.pdf
-\item Wood, S. N., Pya, N., & Säfken, B. (2016). Smoothing parameter and model selection for general 
+reiss-EMR18.pdf
+
+Wood, S. N., Pya, N., & Säfken, B. (2016). Smoothing parameter and model selection for general 
 smooth models. Journal of the American Statistical Association, 111(516), 1548-1563.
-\item Rigby, R. A., & Stasinopoulos, D. M. (2005). Generalized additive models for location, scale 
+
+Rigby, R. A., & Stasinopoulos, D. M. (2005). Generalized additive models for location, scale 
 and shape. Journal of the Royal Statistical Society: Series C (Applied Statistics), 54(3), 507-554.
-}
 }
 \author{
 Meng Xu, Philip Reiss
