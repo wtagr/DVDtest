@@ -98,8 +98,8 @@
 #' ####Estimated with mgcv::gam
 #'  simu.test1 <- DVDtest(dg1, dg2, nperm. ,ev.grid)
 #' ####Estimated with gamlss::gamlss
-#'  simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ cs(.index), 
-#'                 sigma.formula = ~cs(.index), random = ~1|.obs, family = NO, mgcv.gam=F)
+#' # simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ cs(.index), 
+#' #                sigma.formula = ~cs(.index), random = ~1|.obs, family = NO, mgcv.gam=F)
 #' ####Plot
 #'  simu.figs <- DVDplot(simu.test1)
 #'  simu.figs$pfig
