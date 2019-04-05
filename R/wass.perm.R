@@ -20,7 +20,7 @@ wass.perm <-
   function(np, vdFun, ydat1, ydat2, ..., permat, grid, exclude, dist.method) {
     which1 <- permat[np, ]
     nroi <- length(ydat1)
-    permdists<-matrix(NA,length(grid),nroi)
+    permdists<-matrix(NA, length(grid), nroi)
     
     for (k in 1:nroi){
       dat1 <- ydat1[[k]]
@@ -28,7 +28,6 @@ wass.perm <-
       n1 <- length(unique(dat1$.obs))
       n2 <- length(unique(dat2$.obs))
       nerror <- 0
-      nperm <- nrow(permat)
       
       argmt <- list(...)
       bothdat <- rbind(dat1, dat2)
@@ -50,7 +49,7 @@ wass.perm <-
       
       if (inherits(g1.p, "try-error") || inherits(g2.p, "try-error")) nerror <- nerror + 1
       else permdists[,k] <- multiwass(g1.p, g2.p, newdata1=data.frame(.index=grid, .obs=perm1$.obs[1]), newdata2=data.frame(.index=grid, .obs=perm2$.obs[1]),
-                                      dist.method = dist.method, exclude=exclude)$wvec 
+                                      dist.method = dist.method, exclude = exclude, dt1 = perm1, dt2 = perm2)$wvec 
     }
     # list(.index=.index, nperm=nperm, nerror=nerror, permdists=permdists)
     return(permdists)

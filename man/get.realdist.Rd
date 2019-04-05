@@ -4,7 +4,7 @@
 \alias{get.realdist}
 \title{Calculating the distances under the null hypothesis for each k}
 \usage{
-get.realdist(k, vdFun, ydata1, ydata2, grid, ..., excl, dist.method)
+get.realdist(k, vdFun, ydata1, ydata2, grid, ..., exclude, dist.method)
 }
 \arguments{
 \item{k}{a scalar, \code{k}th data.frame in \code{ydata1&2}}
@@ -19,9 +19,9 @@ get.realdist(k, vdFun, ydata1, ydata2, grid, ..., excl, dist.method)
 
 \item{\dots}{arguments of \code{vdFun}}
 
-\item{excl}{an argument of \code{predict} for \code{gam}}
-
 \item{dist.method}{see \code{DVDtest}}
+
+\item{excl}{an argument of \code{predict} for \code{gam}}
 }
 \value{
 a vector of the distances and parameters of varying distributions

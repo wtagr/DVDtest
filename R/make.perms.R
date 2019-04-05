@@ -6,15 +6,16 @@
 #' @param nperm a scalar, number of permutation
 #' @param .index see \code{grid} in \code{DVDtest}
 #' @param adj see \code{permadj} in \code{DVDtest}
+#' @param seeds set seeds for permutation
 #' @return a matrix, permuted indices
 #' @author Philip Reiss, Meng Xu
 #' @seealso \code{DVDtest}
 #' @keywords internal
 make.perms <-
-function(dat1, dat2, nperm, .index, adj,seeds) {
+function(dat1, dat2, nperm, .index, adj, seeds) {
   n1 <- length(unique(dat1$.obs))
   n2 <- length(unique(dat2$.obs))
-  matt <- matrix(NA,nperm, n1)
+  matt <- matrix(NA, nperm, n1)
   set.seed(seeds)
   for (i in 1:nperm) {
     bothdat <- rbind(dat1, dat2)
@@ -28,7 +29,7 @@ function(dat1, dat2, nperm, .index, adj,seeds) {
             & min(perm2$.index) <= min(.index) & max(perm2$.index) >= max(.index)) check <- 1
       }
     }
-    else which1 <- sample(n1+n2, n1)
+    else which1 <- sample(n1 + n2, n1)
     matt[i,] <- which1
   }
   matt

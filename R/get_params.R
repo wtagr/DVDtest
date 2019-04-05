@@ -17,10 +17,10 @@
 #' @keywords internal
 get_params <-
 function(nroi, nperm, permarray, grid, mc.cores){
-  param.array<- array(dim = c(3,length(grid), nroi))
+  param.array<- array(dim = c(3, length(grid), nroi))
 
   predlist <- mclapply(1:nroi, get.params, nperm = nperm, permarray = permarray,
-                   grid = grid,mc.cores=mc.cores)
+                   grid = grid, mc.cores = mc.cores)
   for (roi in 1:nroi) {
     param.array[1,,roi] <- predlist[[roi]]$mu
     param.array[2,,roi] <- predlist[[roi]]$sigma

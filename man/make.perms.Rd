@@ -16,6 +16,8 @@ make.perms(dat1, dat2, nperm, .index, adj, seeds)
 \item{.index}{see \code{grid} in \code{DVDtest}}
 
 \item{adj}{see \code{permadj} in \code{DVDtest}}
+
+\item{seeds}{set seeds for permutation}
 }
 \value{
 a matrix, permuted indices

@@ -43,8 +43,9 @@ in case \code{mgcv.gam = TRUE}.}
 the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 
 \item{mc.cores}{passed to \code{mc.cores} inside of \code{mclapply} 
-(not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{c(1,1)}.
-See extra info in Note.}
+(not available on Windows unless \cr \code{mc.cores = 1}).The first element of \code{mc.cores} 
+passed to dealing with the permutation process, the other passed to dealing with the long length 
+of the data frame. Defaults to \code{c(1,1)}.}
 
 \item{seeds}{set the seed for the permutation via \code{set.seed()}}
 }
@@ -68,9 +69,6 @@ This is the Details section
 (default settings), then defaults to \cr
 \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 and \code{exclude <- "s(.obs)"}, repectively.
-
-\item The first element of \code{mc.cores} passed to dealing with the permutation process, 
-the other passed to dealing with the long length of the data frame.
 
 \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
 gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
@@ -108,14 +106,24 @@ Please contact the maintainer if need further supporting.
  ev.grid <- seq(0, 1, , ngrid)
  nperm. <- 50
  
-####
- simu.test <- DVDtest(dg1, dg2, nperm. ,ev.grid)
- simu.figs <- DVDplot(simu.test)
+####Estimated with mgcv::gam
+ simu.test1 <- DVDtest(dg1, dg2, nperm. ,ev.grid)
+####Estimated with gamlss::gamlss
+ simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ cs(.index), 
+                sigma.formula = ~cs(.index), random = ~1|.obs, family = NO, mgcv.gam=F)
+####Plot
+ simu.figs <- DVDplot(simu.test1)
  simu.figs$pfig
  simu.figs$kfig[[1]]
 }
 \references{
-reiss-EMR18.pdf
+\itemize{
+\item reiss-EMR18.pdf
+\item Wood, S. N., Pya, N., & Säfken, B. (2016). Smoothing parameter and model selection for general 
+smooth models. Journal of the American Statistical Association, 111(516), 1548-1563.
+\item Rigby, R. A., & Stasinopoulos, D. M. (2005). Generalized additive models for location, scale 
+and shape. Journal of the Royal Statistical Society: Series C (Applied Statistics), 54(3), 507-554.
+}
 }
 \author{
 Meng Xu, Philip Reiss

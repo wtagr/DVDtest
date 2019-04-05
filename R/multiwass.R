@@ -6,21 +6,23 @@
 #' @param obj2 another gam/gamlss object
 #' @param newdata1 related evaluation grids
 #' @param newdata2 related evaluation grids
+#' @param dt1 raw data
+#' @param dt2 raw data
 #' @param dist.method see \code{DVDtest}
 #' @param \dots partial arguments in \code{predict}
 #' @return a vector, distances
 #' @author Philip Reiss, Meng Xu
 #' @keywords internal
 multiwass <-
-function(obj1, obj2, newdata1, newdata2, dist.method, ...) {
+function(obj1, obj2, newdata1, newdata2, dist.method, dt1, dt2, ...) {
   npts <- NROW(newdata1)
   wvec <- c()
-  if ("gamlss" %in% class(obj1)) pred1 <- predictAll(obj1, newdata1)
+  if ("gamlss" %in% c(class(obj1))) pred1 <- predictAll(obj1, newdata1, data = dt1)
   else if ("gaulss" %in% obj1$family) {
     tmp <- predict(obj1, newdata1, type = "response", ...)
     pred1 <- list(mu = tmp[,1], sigma = 1/tmp[,2])
   }
-  if ("gamlss" %in% class(obj2)) pred2 <- predictAll(obj2, newdata2)
+  if ("gamlss" %in% c(class(obj2))) pred2 <- predictAll(obj2, newdata2, data = dt2)
   else if ("gaulss" %in% obj2$family) {
     tmp <- predict(obj2, newdata2, type = "response", ...)
     pred2 <- list(mu = tmp[,1], sigma = 1/tmp[,2])
@@ -33,5 +35,5 @@ function(obj1, obj2, newdata1, newdata2, dist.method, ...) {
     wvec[k] <- qfuncs2wass2(qf1, qf2, dist.method = dist.method)
   }
   if (NCOL(newdata1) == 1) names(wvec) = newdata1[,1]
-  return(list(wvec = wvec,pred = list(pred1=pred1,pred2=pred2)))  # can we make this a *named* vector?
+  return(list(wvec = wvec, pred = list(pred1 = pred1, pred2 = pred2)))  # can we make this a *named* vector?
 }

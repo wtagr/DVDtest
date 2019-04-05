@@ -4,7 +4,7 @@
 \alias{multiwass}
 \title{Calculating the distances between two gam/gamlss objects}
 \usage{
-multiwass(obj1, obj2, newdata1, newdata2, dist.method, ...)
+multiwass(obj1, obj2, newdata1, newdata2, dist.method, dt1, dt2, ...)
 }
 \arguments{
 \item{obj1}{a gam/gamlss object}
@@ -16,6 +16,10 @@ multiwass(obj1, obj2, newdata1, newdata2, dist.method, ...)
 \item{newdata2}{related evaluation grids}
 
 \item{dist.method}{see \code{DVDtest}}
+
+\item{dt1}{raw data}
+
+\item{dt2}{raw data}
 
 \item{\dots}{partial arguments in \code{predict}}
 }

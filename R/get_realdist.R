@@ -18,13 +18,13 @@
 
 
 get_realdist <-
-  function(vdFun, ydata1, ydata2, grid, ..., excl, mc.cores, dist.method){
+  function(vdFun, ydata1, ydata2, grid, ..., exclude, mc.cores, dist.method){
     vd_param <- list()
     realdists <- matrix(NA, length(grid), length(ydata1))
     real.list <- mclapply(1:length(ydata1), get.realdist, vdFun = vdFun,
                           ydata1 = ydata1, ydata2 = ydata2,
-                          grid = grid, ..., excl = excl, 
-                          dist.method = dist.method,mc.cores=mc.cores)
+                          grid = grid, ..., exclude = exclude, 
+                          dist.method = dist.method, mc.cores = mc.cores)
     for (i in 1:length(ydata1)) {
       realdists[,i] <- real.list[[i]]$rlist
       vd_param[[i]] <- real.list[[i]]$vd.param
