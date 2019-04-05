@@ -18,7 +18,8 @@
 #' Defaults to \code{'wass'}.
 #' @param mgcv.gam a logical variable, whether to apply \code{mgcv::gam} for eastimating 
 #' distributions, whose parameters are a smooth function of a continuous variable. If 
-#' \code{FALSE}, \code{gamlss::gamlss} is adopted.
+#' \code{FALSE}, \code{gamlss.mx::gamlssNP} is adopted, which could cover a wider range of 
+#' varing distributions.
 #' @param \dots passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
 #' \code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
 #' other optional arguments in \code{mgcv::gam}. Otherwise, \code{...} passed to 
@@ -28,7 +29,7 @@
 #' @param permadj a logical variable, whether to adjust the permutated data to cover 
 #' the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.
 #' @param mc.cores passed to \code{mc.cores} inside of \code{mclapply} 
-#' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}. 
+#' (not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{c(1,1)}.
 #' See extra info in Note.
 #' @param seeds set the seed for the permutation via \code{set.seed()}
 #' @return 
@@ -45,7 +46,8 @@
 #' \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 #' and \code{exclude <- "s(.obs)"}, repectively.
 #' 
-#' \item Multicore calculation is dealing with the permutation.
+#' \item The first element of \code{mc.cores} passed to dealing with the permutation process, 
+#' the other passed to dealing with the long length of the data frame.
 #' 
 #' \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
 #' gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
@@ -55,6 +57,7 @@
 #' @references reiss-EMR18.pdf
 #' @keywords permutation, pointwise
 #' @export
+#' @import mgcv gamlss gamlss.dist gamlss.mx
 #' @examples
 #' 
 #' ## Data Generation ##
@@ -113,7 +116,7 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
 
   if (mgcv.gam & is.null(exclude)& !is.null(argmt[["formula"]])) stop('The arguments related mgcv::gam are missing')
 
-  if (mgcv.gam) vdFun<-mgcv::gam else vdFun<-gamlss::gamlss
+  if (mgcv.gam) vdFun<-mgcv::gam else vdFun<-gamlss.mx::gamlssNP
   
   nroi <- length(ydata1)
   permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj, seeds = seeds)

@@ -28,7 +28,8 @@ Defaults to \code{'wass'}.}
 
 \item{mgcv.gam}{a logical variable, whether to apply \code{mgcv::gam} for eastimating 
 distributions, whose parameters are a smooth function of a continuous variable. If 
-\code{FALSE}, \code{gamlss::gamlss} is adopted.}
+\code{FALSE}, \code{gamlss.mx::gamlssNP} is adopted, which could cover a wider range of 
+varing distributions.}
 
 \item{\dots}{passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
 \code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
@@ -42,7 +43,7 @@ in case \code{mgcv.gam = TRUE}.}
 the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 
 \item{mc.cores}{passed to \code{mc.cores} inside of \code{mclapply} 
-(not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{1}. 
+(not available on Windows unless \cr \code{mc.cores = 1}). Defaults to \code{c(1,1)}.
 See extra info in Note.}
 
 \item{seeds}{set the seed for the permutation via \code{set.seed()}}
@@ -68,7 +69,8 @@ This is the Details section
 \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 and \code{exclude <- "s(.obs)"}, repectively.
 
-\item Multicore calculation is dealing with the permutation.
+\item The first element of \code{mc.cores} passed to dealing with the permutation process, 
+the other passed to dealing with the long length of the data frame.
 
 \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
 gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
