@@ -19,7 +19,7 @@ function(params, family, dist.method) {
     else {
       
       qfun. <- paste0("q",family[1])
-      qfun <- match.fun(qfun)
+      qfun <- match.fun(qfun.)
       return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
     }
   }
