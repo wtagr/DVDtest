@@ -20,16 +20,16 @@ function(k, vdFun, ydata1, ydata2, grid, ..., exclude, dist.method){
 
   argmt <- list(...)
   if (is.null(argmt[["formula"]])) {
-    g1 <- vdFun(data = ydata1[[k]],
+    g1 <- quiet(vdFun(data = ydata1[[k]],
                 formula = list(.value~s(.index)+s(.obs, bs="re"), ~s(.index)),
-                family = gaulss())
-    g2 <- vdFun(data=ydata2[[k]],
+                family = gaulss()))
+    g2 <- quiet(vdFun(data=ydata2[[k]],
                 formula = list(.value~s(.index)+s(.obs, bs="re"), ~s(.index)),
-                family = gaulss())
+                family = gaulss()))
     exclude <- "s(.obs)"
   } else {
-    g1 <- vdFun(data=ydata1[[k]],...)
-    g2 <- vdFun(data=ydata2[[k]],...)
+    g1 <- quiet(vdFun(data=ydata1[[k]],...))
+    g2 <- quiet(vdFun(data=ydata2[[k]],...))
     }
   
   rlist <- multiwass(g1, g2, newdata1 = data.frame(.index = grid, .obs = ydata1[[k]]$.obs[1]),

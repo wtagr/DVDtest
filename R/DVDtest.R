@@ -47,9 +47,8 @@
 #' \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 #' and \code{exclude <- "s(.obs)"}, repectively.
 #' 
-#' \item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
-#' gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
-#' Please contact the maintainer if need further supporting.
+#' \item Normal distribution in \code{mgcv::gam} and \code{gamlss.family} are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
+#' 
 #' }
 #' @author Meng Xu, Philip Reiss
 #' @references 
@@ -134,17 +133,19 @@ function(ydata1, ydata2, nperm, grid, dist.method = 'wass', mgcv.gam=TRUE,
   
   nroi <- length(ydata1)
   permat.all <- make.perms(ydata1[[1]], ydata2[[1]], nperm, grid, adj = permadj, seeds = seeds)
+  cat("####perm allocated####","\n")
   reald <- get_realdist(vdFun = vdFun, ydata1 = ydata1, ydata2 = ydata2,
                         grid = grid,..., exclude = exclude, dist.method = dist.method,
                         mc.cores = mc.cores[2])
   realdists<-reald$realdists
+  cat("####real calculated####","\n")
   vdparam<-reald$vdparam
   permarray <- wass_perm(vdFun = vdFun, nperm = nperm, ydata1 = ydata1, ydata2 = ydata2,...,
                        grid = grid, permat = permat.all, exclude = exclude,
                        mc.cores = mc.cores[1], dist.method = dist.method)
   param.array <- get_params(nroi=nroi, nperm = nperm, permarray = permarray, grid = grid,
                             mc.cores = mc.cores[2])
-  
+  cat("####perm calculated####","\n")
   # Raw p-values (p.real, p.perm)
   p.mat <- get.pval(permarray = permarray, param.array = param.array, realdists = realdists,
                     nroi=nroi, grid = grid, nperm = nperm)

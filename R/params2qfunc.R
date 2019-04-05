@@ -20,7 +20,10 @@ function(params, family, dist.method) {
       
       qfun. <- paste0("q",family[1])
       qfun <- match.fun(qfun.)
-      return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
+      if (is.null(tau)&is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma))
+      else if (is.null(tau)) return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu))
+      else if (is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma, tau=tau))
+      else return(function(p)qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
     }
   }
 
@@ -31,7 +34,11 @@ function(params, family, dist.method) {
       
       pfun. <- paste0("d",family[1])
       pfun <- match.fun(qfun.)
-      return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu, tau=tau))
+      if (is.null(tau)&is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma))
+      else if (is.null(tau)) return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu))
+      else if (is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma, tau=tau))
+      else return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu, tau=tau))
+  
     }
   }
   }

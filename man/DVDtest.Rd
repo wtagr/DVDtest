@@ -70,9 +70,8 @@ This is the Details section
 \code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
 and \code{exclude <- "s(.obs)"}, repectively.
 
-\item Normal distribution in mgcv::gam and BCCG, BCT and BCPE in 
-gamlss::gamlss are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
-Please contact the maintainer if need further supporting.
+\item Normal distribution in \code{mgcv::gam} and \code{gamlss.family} are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
+
 }
 }
 \examples{

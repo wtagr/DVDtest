@@ -35,16 +35,16 @@ wass.perm <-
       perm1 <- bothdat[bothdat$.obs %in% unique(bothdat$.obs)[which1],]
       perm2 <- bothdat[!bothdat$.obs %in% unique(bothdat$.obs)[which1],]
       if (is.null(argmt[["formula"]])) {
-        g1.p <- try(vdFun(data = perm1,
+        g1.p <- quiet(try(vdFun(data = perm1,
                       formula = list(.value~s(.index)+s(.obs, bs="re"), ~s(.index)),
-                      family = gaulss()))
-        g2.p <- try(vdFun(data = perm2,
+                      family = gaulss())))
+        g2.p <- quiet(try(vdFun(data = perm2,
                       formula = list(.value~s(.index)+s(.obs, bs="re"), ~s(.index)),
-                      family = gaulss()))
+                      family = gaulss())))
         exclude <- "s(.obs)"
       } else {
-        g1.p <- try(vdFun(data = perm1, ...))
-        g2.p <- try(vdFun(data = perm2, ...))
+        g1.p <- quiet(try(vdFun(data = perm1, ...)))
+        g2.p <- quiet(try(vdFun(data = perm2, ...)))
       }
       
       if (inherits(g1.p, "try-error") || inherits(g2.p, "try-error")) nerror <- nerror + 1

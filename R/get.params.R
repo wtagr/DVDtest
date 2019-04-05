@@ -18,8 +18,8 @@ function(k, nperm, permarray, grid) {
 
   d1 <- na.omit(data.frame(dist = as.vector(t(permarray[,,k])), 
                            .index = rep(grid, nperm)))
-  f1 <- gamlss(dist~pb(.index), sigma.formula = ~pb(.index), data = d1, family = GG)
-  predd <- predictAll(f1, data = d1, newdata = data.frame(.index = grid))
+  f1 <- quiet(gamlss(dist~pb(.index), sigma.formula = ~pb(.index), data = d1, family = GG))
+  predd <- quiet(predictAll(f1, data = d1, newdata = data.frame(.index = grid)))
   list(mu = predd$mu[1:length(grid)], sigma = predd$sigma[1:length(grid)],
        nu = predd$nu[1:length(grid)], aic = f1$aic)
 }
