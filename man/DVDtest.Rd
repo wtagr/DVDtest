@@ -26,15 +26,15 @@ distributions.}
 distance (\code{'wass'}), \code{'L2'} distance, \code{'L1'} distance and \code{'Hellinger'}. 
 Defaults to \code{'wass'}.}
 
-\item{mgcv.gam}{a logical variable, whether to apply \code{mgcv::gam} for eastimating 
+\item{mgcv.gam}{a logical variable, whether to apply \code{\link[mgcv]{gam}} for eastimating 
 distributions, whose parameters are a smooth function of a continuous variable. If 
-\code{FALSE}, \code{gamlss::gamlss} is adopted, which could cover a wider range of 
-varing distributions.}
+\code{FALSE}, \code{\link[gamlss]{gamlss}} is adopted, which could cover a wider range of 
+varying distributions.}
 
-\item{\dots}{passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
-\code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
+\item{\dots}{passed to arguments of \code{\link[mgcv]{gam}} or \code{\link[gamlss]{gamlss}}. If \code{mgcv.gam = TRUE}, 
+\code{\dots} should include \code{formula}, \code{family} and 
 other optional arguments in \code{mgcv::gam}. Otherwise, \code{...} passed to 
-arguments inside of \code{gamlss::gamlss}.}
+arguments inside of \code{\link[gamlss]{gamlss}}. See Examples for details.}
 
 \item{exclude}{passed to \code{exclude} inside of \code{predict.gam} 
 in case \code{mgcv.gam = TRUE}.}
@@ -42,16 +42,16 @@ in case \code{mgcv.gam = TRUE}.}
 \item{permadj}{a logical variable, whether to adjust the permutated data to cover 
 the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 
-\item{mc.cores}{passed to \code{mc.cores} inside of \code{mclapply} 
-(not available on Windows unless \cr \code{mc.cores = 1}).The first element of \code{mc.cores} 
+\item{mc.cores}{passed to \code{mc.cores} inside of \code{\link[parallel]{mclapply}} 
+(not available on Windows unless \code{mc.cores = c(1,1)}). The first element of \code{mc.cores} 
 passed to dealing with the permutation process, the other passed to dealing with the long length 
 of the data frame. Defaults to \code{c(1,1)}.}
 
-\item{seeds}{set the seed for the permutation via \code{set.seed()}}
+\item{seeds}{set the seed for the permutation via \code{set.seed(seeds)}}
 }
 \value{
 \item{.index}{a vector, evaluation grids.}
-\item{pval}{a vector or matrix of (corrected) p values.}
+\item{pval}{a vector or matrix of (adjusted) p values.}
 \item{vdparam}{a list of paramters of varying distributions.}
 }
 \description{
@@ -66,11 +66,13 @@ This is the Details section
 \code{data.frame}s, the lenghs of two lists must be the same.
 
 \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
-(default settings), then defaults to \cr
-\code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))} \cr
-and \code{exclude <- "s(.obs)"}, repectively.
+(default settings), then they both default to \cr
+\code{formula <- list(.value ~ s(.index) + s(.obs, bs = "re"), ~ s(.index))}, \cr
+\code{family = gauss()} and \code{exclude <- "s(.obs)"}, repectively.
 
-\item Normal distribution in \code{mgcv::gam} and \code{gamlss.family} are currently supported by \code{DVDtest} for fitting a GAMLSS-type varying distributions. 
+\item Normal distribution (\code{gauss()}) in \code{mgcv::gam} is supported. And \code{\link[gamlss.dist]{gamlss.family}} is supported as well by 
+\code{DVDtest} for fitting a GAMLSS-type varying distributions with various types of random effect.
+Note that the permuted data may not match some specific distributions during the permutation. 
 
 }
 }
