@@ -127,8 +127,8 @@ and \code{exclude <- "s(.obs)"}, repectively.
  # nu2 <- nu1
  # nperson <- 10
  # library(gamlss)
- # fun1 <- function(t) rGIG(nperson, mu1(t), sig1(t),nu1(t))
- # fun2 <- function(t) rGIG(nperson, mu2(t), sig2(t),nu2(t))
+ # fun1 <- function(t) rGG(nperson, mu1(t), sig1(t),nu1(t))
+ # fun2 <- function(t) rGG(nperson, mu2(t), sig2(t),nu2(t))
  # tp <- seq(0,1,,10)
  # data1 <- sapply(tp,fun1)
  # data2 <- sapply(tp,fun2)
@@ -146,8 +146,8 @@ and \code{exclude <- "s(.obs)"}, repectively.
  # nperm. <- 30
  # simu.test3 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
  #                       sigma.formula = ~pb(.index),
- #                       nu.formula= ~pb(.index),
- #                       random = ~1|.obs, family = GIG, mgcv.gam = FALSE))
+ #                       nu.formula= ~pb(.index), seeds=123,
+ #                       random = ~1|.obs, family = GG, mgcv.gam = FALSE))
  
 }
 \references{
