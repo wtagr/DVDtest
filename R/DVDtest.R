@@ -57,7 +57,7 @@
 #'
 #' reiss-EMR18.pdf
 #' 
-#' Wood, S. N., Pya, N., & Säfken, B. (2016). Smoothing parameter and model selection for general 
+#' Wood, S. N., Pya, N., & Safken, B. (2016). Smoothing parameter and model selection for general 
 #' smooth models. Journal of the American Statistical Association, 111(516), 1548-1563.
 #' 
 #' Rigby, R. A., & Stasinopoulos, D. M. (2005). Generalized additive models for location, scale 
