@@ -8,37 +8,37 @@
 #' @import gamlss gamlss.dist
 #' @keywords internal
 params2qfunc <-
-function(params, family, dist.method) {
-  mu <- params$mu
-  sigma <- params$sigma
-  nu <- params$nu
-  tau <- params$tau
-  if (dist.method == 'wass'){
-    if ("gaulss" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
-    else if ("NO" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
-    else {
-      
-      qfun. <- paste0("q",family[1])
-      qfun <- match.fun(qfun.)
-      if (is.null(tau)&is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma))
-      else if (is.null(tau)) return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu))
-      else if (is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma, tau=tau))
-      else return(function(p)qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
+  function(params, family, dist.method) {
+    mu <- params$mu
+    sigma <- params$sigma
+    nu <- params$nu
+    tau <- params$tau
+    if (dist.method == 'wass'){
+      if ("gaulss" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
+      else if ("NO" %in% family) return(function(p) qnorm(p, mean=mu, sd=sigma))
+      else {
+        
+        qfun. <- paste0("q",family[1])
+        qfun <- match.fun(qfun.)
+        if (is.null(tau)&&is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma))
+        else if (is.null(tau)&&!is.null(nu)) return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu))
+        else if (is.null(nu)&&!is.null(tau)) return(function(p) qfun(p, mu=mu, sigma=sigma, tau=tau))
+        else return(function(p) qfun(p, mu=mu, sigma=sigma, nu=nu, tau=tau))
+      }
     }
-  }
-
-  if (any(dist.method == c('L2','L1','Hellinger'))) {
-    if ("gaulss" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
-    else if ("NO" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
-    else {
-      
-      pfun. <- paste0("d",family[1])
-      pfun <- match.fun(qfun.)
-      if (is.null(tau)&is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma))
-      else if (is.null(tau)) return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu))
-      else if (is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma, tau=tau))
-      else return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu, tau=tau))
-  
+    
+    if (any(dist.method == c('L2','L1','Hellinger'))) {
+      if ("gaulss" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
+      else if ("NO" %in% family) return(function(x) dnorm(x, mean=mu, sd=sigma))
+      else {
+        
+        pfun. <- paste0("d",family[1])
+        pfun <- match.fun(qfun.)
+        if (is.null(tau)&&is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma))
+        else if (is.null(tau)&&!is.null(nu)) return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu))
+        else if (is.null(nu)&&!is.null(tau)) return(function(x) pfun(x, mu=mu, sigma=sigma, tau=tau))
+        else return(function(x) pfun(x, mu=mu, sigma=sigma, nu=nu, tau=tau))
+        
+      }
     }
-  }
   }

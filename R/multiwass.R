@@ -17,13 +17,15 @@ multiwass <-
 function(obj1, obj2, newdata1, newdata2, dist.method, dt1, dt2, ...) {
   npts <- NROW(newdata1)
   wvec <- c()
-  if ("gamlss" %in% c(class(obj1))) pred1 <- quiet(predictAll(obj1, newdata1, data = dt1))
-  else if ("gaulss" %in% obj1$family) {
+  if ("gamlss" %in% c(class(obj1))) {
+    pred1 <- quiet(predictAll(object=obj1, newdata=newdata1, data = dt1))
+  }else if ("gaulss" %in% obj1$family) {
     tmp <- quiet(predict(obj1, newdata1, type = "response", ...))
     pred1 <- list(mu = tmp[,1], sigma = 1/tmp[,2])
   }
-  if ("gamlss" %in% c(class(obj2))) pred2 <- quiet(predictAll(obj2, newdata2, data = dt2))
-  else if ("gaulss" %in% obj2$family) {
+  if ("gamlss" %in% c(class(obj2))) {
+    pred2 <- quiet(predictAll(object=obj2, newdata=newdata2, data = dt2))
+  }else if ("gaulss" %in% obj2$family) {
     tmp <- quiet(predict(obj2, newdata2, type = "response", ...))
     pred2 <- list(mu = tmp[,1], sigma = 1/tmp[,2])
   }

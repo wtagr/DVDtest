@@ -5,9 +5,9 @@
 #' This is the Details section
 #' 
 #' @param ydata1 a \code{data.frame} or a \code{list} of \code{data.frame}, containing 
-#' at least 3 columns called '\code{.obs}', '\code{.index}' and '\code{.value}' which 
-#' specify which curve the point belongs to (\code{.obs}) at which ('\code{.index}') 
-#' it was observed and the observed value (\code{'.value'}). See details in the package 
+#' at least 3 columns called \code{.obs}, \code{.index} and \code{.value} which 
+#' specify which curve the point belongs to (\code{.obs}) at which (\code{.index}) 
+#' it was observed and the observed value (\code{.value}). See details in the package 
 #' \code{refund}. Other columns are available as well for modelling the varying 
 #' distributions.
 #' @param ydata2 same as \code{ydata1}. 
@@ -18,7 +18,7 @@
 #' Defaults to \code{'wass'}.
 #' @param mgcv.gam a logical variable, whether to apply \code{mgcv::gam} for eastimating 
 #' distributions, whose parameters are a smooth function of a continuous variable. If 
-#' \code{FALSE}, \code{gamlss.mx::gamlssNP} is adopted, which could cover a wider range of 
+#' \code{FALSE}, \code{gamlss::gamlss} is adopted, which could cover a wider range of 
 #' varing distributions.
 #' @param \dots passed to arguments of \code{gam} or \code{gamlss}. If \code{mgcv.gam = TRUE}, 
 #' \code{\dots} should include \code{formula}, \code{family} (=\code{gaulss()}) and 
@@ -39,7 +39,7 @@
 #' \item{vdparam}{a list of paramters of varying distributions.}
 #' @note 
 #' \itemize{
-#' \item If \code{ydata1} and \code{ydata2} are \code{list}s of 
+#' \item If \code{ydata1} and \code{ydata2} are lists of 
 #' \code{data.frame}s, the lenghs of two lists must be the same.
 #' 
 #' \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
@@ -94,7 +94,7 @@
 #' 
 #'  ngrid <- 50
 #'  ev.grid <- seq(0, 1, , ngrid)
-#'  nperm. <- 50
+#'  nperm. <- 30
 #'  
 #' ####Estimated with mgcv::gam
 #'  library(mgcv)
@@ -107,6 +107,39 @@
 #'  simu.figs <- DVDplot(simu.test1)
 #'  simu.figs$pfig
 #'  simu.figs$kfig[[1]]
+#' ####Not Run!
+#' ####Non-normal case
+#'  # p <- 6
+#'  # mu1 <- function(t) 0.2*(p-1)*sin(pi*t)+t+1
+#'  # mu2 <- function(t) -0.2*(p-1)*sin(pi*t)+t+1
+#'  # sig1 <- function(t) t+1
+#'  # sig2 <- sig1
+#'  # nu1 <- function(t) t+1
+#'  # nu2 <- nu1
+#'  # nperson <- 10
+#'  # library(gamlss)
+#'  # fun1 <- function(t) rexGAUS(nperson, mu1(t), sig1(t),nu1(t))
+#'  # fun2 <- function(t) rexGAUS(nperson, mu2(t), sig2(t),nu2(t))
+#'  # tp <- seq(0,1,,10)
+#'  # data1 <- sapply(tp,fun1)
+#'  # data2 <- sapply(tp,fun2)
+#'  
+#'  # library(reshape2)
+#'  # colnames(data2) <- colnames(data1) <- tp
+#'  # rownames(data2) <- 1:nperson+2*nperson
+#'  # dg1 <- melt(data1)
+#'  # dg2 <- melt(data2)
+#'  # colnames(dg1) <- colnames(dg2) <- c('.obs','.index','.value')
+#'  # dg1$.obs <- as.factor(dg1$.obs)
+#'  # dg2$.obs <- as.factor(dg2$.obs)
+#'  # ngrid <- 50
+#'  # ev.grid <- seq(0, 1, , ngrid)
+#'  # nperm. <- 30
+#'  # simu.test3 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
+#'  #                       sigma.formula = ~pb(.index),
+#'  #                       nu.formula= ~pb(.index),
+#'  #                       random = ~1|.obs, family = exGAUS, mgcv.gam = FALSE))
+#'  
 
 
 
