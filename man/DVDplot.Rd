@@ -4,8 +4,7 @@
 \alias{DVDplot}
 \title{Plotting DVDtest}
 \usage{
-DVDplot(tobj, kxlab = NULL, kylab = NULL, kname = NULL,
-  thhd = 0.05)
+DVDplot(tobj, kxlab = NULL, kylab = NULL, kname = NULL, thhd = 0.05)
 }
 \arguments{
 \item{tobj}{a return test object of \code{\link{DVDtest}}}

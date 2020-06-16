@@ -4,12 +4,18 @@
 \alias{get_realdist}
 \title{Calculating the distances under the null hypothesis}
 \usage{
-get_realdist(vdFun, ydata1, ydata2, grid, ..., exclude, mc.cores,
-  dist.method)
+get_realdist(
+  ydata1,
+  ydata2,
+  grid,
+  ...,
+  exclude,
+  mc.cores,
+  dist.method,
+  mgcv.gam
+)
 }
 \arguments{
-\item{vdFun}{a function, \code{gam} or \code{gamlss}, for fitting the varying distributions}
-
 \item{ydata1}{see \code{DVDtest}}
 
 \item{ydata2}{see \code{DVDtest}}
@@ -21,6 +27,8 @@ get_realdist(vdFun, ydata1, ydata2, grid, ..., exclude, mc.cores,
 \item{mc.cores}{see the 2nd element of \code{mc.cores} in \code{DVDtest}}
 
 \item{dist.method}{see \code{DVDtest}}
+
+\item{mgcv.gam}{see \code{DVDtest}}
 
 \item{excl}{an argument of \code{predict} for \code{gam}}
 }

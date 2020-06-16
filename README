@@ -1,3 +1,0 @@
-require(devtools)
-install_github("wtagr/DVDtest", force = TRUE)
-library(DVDtest)

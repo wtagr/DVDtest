@@ -13,22 +13,21 @@
 #' @import gamlss.dist
 #' @keywords internal
 #' 
-get.pval <-
-function(permarray, param.array, realdists, nroi, grid, nperm){
+get.pval <- function(permarray, param.array, realdists, nroi, grid, nperm) {
   p.perm <- array(NA, dim = dim(permarray))
   p.real <- array(dim = dim(realdists))
   for (k in 1:length(grid)) for (l in 1:nroi) {
-    mu <- param.array[1,k,l]
-    sigma <- param.array[2,k,l]
-    nu <- param.array[3,k,l]
-    p.real[k,l] <- pGG(realdists[k,l], mu, sigma, nu, lower.tail = FALSE)
-    witch <- !is.na(permarray[,k,l])
-    p.perm[witch,k,l] <- pGG(permarray[witch,k,l], mu, sigma,nu, lower.tail = FALSE)
+    mu <- param.array[1, k, l]
+    sigma <- param.array[2, k, l]
+    # nu <- param.array[3, k, l]
+    p.real[k, l] <- pGA(realdists[k, l], mu, sigma, lower.tail = FALSE)
+    witch <- !is.na(permarray[, k, l])
+    p.perm[witch, k, l] <- pGA(permarray[witch, k, l], mu, sigma, lower.tail = FALSE)
   }
   
   # Adjusted p-values (pmat)
   minp <- apply(p.perm, 1, min, na.rm = TRUE)
   logicarray <- outer(minp, p.real, "<=")
-  pmat <- (1 + apply(logicarray, 2:3, sum)) / (1 + nperm)
+  pmat <- (1 + apply(logicarray, 2:3, sum))/(1 + nperm)
   return(pmat)
 }

@@ -4,12 +4,14 @@
 \alias{wass.perm}
 \title{Calculating the distances via permuted data for each k}
 \usage{
-wass.perm(np, vdFun, ydat1, ydat2, ..., permat, grid, exclude, dist.method)
+wass.perm(ydat1, ydat2, ..., permat, grid, exclude, dist.method, mgcv.gam)
 }
 \arguments{
-\item{vdFun}{a function, \code{gam} or \code{gamlss}, for fitting the varying distributions}
+\item{ydat1}{\code{k}th \code{data.frame} of \code{ydata1}}
 
-\item{\dots}{arguments of \code{vdFun}}
+\item{ydat2}{\code{k}th \code{data.frame} of \code{ydata2}}
+
+\item{\dots}{arguments of the function \code{gamlss} if \code{mgcv.gam = FALSE}}
 
 \item{permat}{a result of \code{make.perm}}
 
@@ -19,11 +21,7 @@ wass.perm(np, vdFun, ydat1, ydat2, ..., permat, grid, exclude, dist.method)
 
 \item{dist.method}{see \code{DVDtest}}
 
-\item{k}{a scalar, \code{k}th \code{data.frame} of \code{ydata1&2}}
-
-\item{dat1}{\code{k}th \code{data.frame} of \code{ydata1}}
-
-\item{dat2}{\code{k}th \code{data.frame} of \code{ydata2}}
+\item{mgcv.gam}{see \code{DVDtest}}
 }
 \value{
 a matrix of permuted-data distances

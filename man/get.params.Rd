@@ -2,12 +2,12 @@
 % Please edit documentation in R/get.params.R
 \name{get.params}
 \alias{get.params}
-\title{Fitting the generalized gamma (Pearson type III) distribution for each k}
+\title{Fitting Gamma Distribution (Pearson type III) for each region}
 \usage{
 get.params(k, nperm, permarray, grid)
 }
 \arguments{
-\item{k}{a scalar, \code{k}th data.frame in \code{ydata1&2}}
+\item{k}{a scalar, \code{k}th data.frame in \code{ydata1 & 2}}
 
 \item{nperm}{a scalar, number of permutation}
 
@@ -25,6 +25,6 @@ Fitting by the permuted-data distances
 \code{\link{get_params}}
 }
 \author{
-Philip Reiss, Meng Xu
+Meng Xu
 }
 \keyword{internal}
