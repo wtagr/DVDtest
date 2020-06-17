@@ -24,7 +24,7 @@ get.pval <- function(permarray, param.array, realdists, nroi, grid, nperm) {
     witch <- !is.na(permarray[, k, l])
     p.perm[witch, k, l] <- pGA(permarray[witch, k, l], mu, sigma, lower.tail = FALSE)
   }
-  
+
   # Adjusted p-values (pmat)
   minp <- apply(p.perm, 1, min, na.rm = TRUE)
   logicarray <- outer(minp, p.real, "<=")

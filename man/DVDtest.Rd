@@ -118,7 +118,7 @@ library(DVDtest)
 
  ngrid <- 50
  ev.grid <- seq(0, 1, , ngrid)
- nperm. <- 30
+ nperm. <- 40
  
 ####Estimated with mgcv::gam
  library(mgcv)
@@ -161,7 +161,7 @@ library(DVDtest)
  
  ngrid <- 50
  ev.grid <- seq(0, 1, , ngrid)
- nperm. <- 30
+ nperm. <- 40
  
  simu.test3 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
                        sigma.formula = ~pb(.index),

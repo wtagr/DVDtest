@@ -96,7 +96,7 @@
 #' 
 #'  ngrid <- 50
 #'  ev.grid <- seq(0, 1, , ngrid)
-#'  nperm. <- 30
+#'  nperm. <- 40
 #'  
 #' ####Estimated with mgcv::gam
 #'  library(mgcv)
@@ -139,7 +139,7 @@
 #'  
 #'  ngrid <- 50
 #'  ev.grid <- seq(0, 1, , ngrid)
-#'  nperm. <- 30
+#'  nperm. <- 40
 #'  
 #'  simu.test3 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
 #'                        sigma.formula = ~pb(.index),
@@ -162,7 +162,8 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
     if (mc.cores > 1) warning( "'mc.cores' > 1 is not supported on Windows, and it force to set as 'mc.cores = 1'" )
     mc.cores <- 1
   }
-  if (identical(nperm/chunksize/mc.cores,as.integer(nperm/chunksize/mc.cores))) 
+
+  if (nperm/chunksize/mc.cores-as.integer(nperm/chunksize/mc.cores) > 1e-12)
     stop("We suggest the arguments 'chunksize' and 'mc.cores' are multiply factors of number of permutation 'nperm'.")
   
   if (!is.list(ydata1[[1]])) {
@@ -214,7 +215,7 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
   }
   ptemp = list()
   for (j in 1:(nperm/chunksize/mc.cores)) {
-    if (!j%%report.every)cat("*** Perm", j*chunksize*mc.cores, "***\n")
+    if (!j%%report.every) cat("*** Perm", j*chunksize*mc.cores, "***\n")
     lb <- mc.cores * (j - 1) + 1
     ub <- mc.cores * j
     ptemp[[j]] = mclapply(lb:ub, perm.chunk, mc.cores = mc.cores, mgcv.gam = mgcv.gam, mc.preschedule = FALSE)
@@ -223,7 +224,7 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
   cat("*** Perm", j*chunksize*mc.cores, "***\n")
   # Make a 101 x 74 x nperm. array of permdists nerrvec <- rep(0,nroi)
   ndone <- nperm/chunksize/mc.cores
-  
+
   permarray <- array(dim = c(nperm, length(grid), nroi))
   pcount <- 0
   for (k in 1:ndone) {
@@ -244,7 +245,7 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
   cat("#### perm dist. calculated ####", "\n")
   param.array <- get_params(nroi = nroi, nperm = nperm, permarray = permarray, 
                             grid = grid, mc.cores = mc.cores)
-  
+
   # Raw p-values (p.real, p.perm)
   if (!stepdown) {
     p.mat <- get.pval(permarray = permarray, param.array = param.array, 
