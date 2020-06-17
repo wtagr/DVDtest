@@ -204,8 +204,8 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
     MM <- chunksize * j
     permatlist[[j]] <- permat.all[mm:MM, ]
   }
-  
-  perm.chunk <- function(whichmat, nregion = nroi, mgcv.gam = mgcv.gam) {
+
+  perm.chunk <- function(whichmat) {
     ob <- list()
     for (k in 1:nroi) {
       ob[[k]] <- wass.perm(ydata1[[k]], ydata2[[k]], permat = permatlist[[whichmat]], 
@@ -213,12 +213,13 @@ DVDtest <- function(ydata1, ydata2, nperm = 60, grid, dist.method = "wass",
     }
     ob
   }
+
   ptemp = list()
   for (j in 1:(nperm/chunksize/mc.cores)) {
     if (!j%%report.every) cat("*** Perm", j*chunksize*mc.cores, "***\n")
     lb <- mc.cores * (j - 1) + 1
     ub <- mc.cores * j
-    ptemp[[j]] = mclapply(lb:ub, perm.chunk, mc.cores = mc.cores, mgcv.gam = mgcv.gam, mc.preschedule = FALSE)
+    ptemp[[j]] = mclapply(lb:ub, perm.chunk, mc.cores = mc.cores, mc.preschedule = FALSE)
     # save(list=paste0('p',j), file=paste0('perms/p',j,'.Rdata'))
   }
   cat("*** Perm", j*chunksize*mc.cores, "***\n")
