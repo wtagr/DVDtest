@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_params.R
 \name{get_params}
 \alias{get_params}
-\title{Fitting the generalized gamma (Pearson type III) distribution}
+\title{Fitting the Gamma distribution (Pearson type III)}
 \usage{
 get_params(nroi, nperm, permarray, grid, mc.cores)
 }
@@ -21,7 +21,7 @@ get_params(nroi, nperm, permarray, grid, mc.cores)
 an array, \code{param.array}
 }
 \description{
-Fitting the generalized gamma (Pearson type III) distribution
+Fitting the Gamma distribution (Pearson type III)
 }
 \seealso{
 \code{DVDtest}

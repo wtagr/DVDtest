@@ -38,3 +38,4 @@ make.perms <- function(dat1, dat2, nperm, .index, adj, seeds) {
   }
   matt
 }
+

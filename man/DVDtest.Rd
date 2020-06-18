@@ -7,7 +7,7 @@
 DVDtest(
   ydata1,
   ydata2,
-  nperm = 60,
+  nperm,
   grid,
   dist.method = "wass",
   mgcv.gam = TRUE,
@@ -15,10 +15,8 @@ DVDtest(
   exclude = NULL,
   permadj = FALSE,
   mc.cores = 1,
-  chunksize = 2,
   seeds = NULL,
-  report.every = 10,
-  stepdown = FALSE
+  stepdown = TRUE
 )
 }
 \arguments{
@@ -26,7 +24,7 @@ DVDtest(
 at least 3 columns called \code{.obs}, \code{.index} and \code{.value} which 
 specify which curve the point belongs to (\code{.obs}) at which (\code{.index}) 
 it was observed and the observed value (\code{.value}). See details in the package 
-\code{refund}. Other columns are available as well for modeling the varying 
+\code{refund}. Other columns are available as well for modelling the varying 
 distributions.}
 
 \item{ydata2}{same as \code{ydata1}.}
@@ -37,7 +35,7 @@ distributions.}
 
 \item{dist.method}{the distance measure to be used. This must be one of Wasserstein 
 distance (\code{'wass'}), \code{'L2'} distance, \code{'L1'} distance and \code{'Hellinger'}. 
-It defaults to \code{'wass'}.}
+Defaults to \code{'wass'}.}
 
 \item{mgcv.gam}{a logical variable, whether to apply \code{\link[mgcv]{gam}} for eastimating 
 distributions, whose parameters are a smooth function of a continuous variable. If 
@@ -58,13 +56,9 @@ the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 \item{mc.cores}{passed to \code{mc.cores} inside of \code{\link[parallel]{mclapply}} 
 (not available on Windows unless \code{mc.cores = 1}).}
 
-\item{chunksize}{a scalar, number of permutations per core/threat when using \code{mcapply}. It defaults to 2.}
+\item{seeds}{set the seed for the permutation via \code{set.seed(seeds)}}
 
-\item{seeds}{a scalar, to set the seed for the permutation via \code{set.seed(seeds)}. It defaults to \code{NULL}.}
-
-\item{report.every}{a scalar, to report the current number of permutations.}
-
-\item{stepdown}{a logical variable, which denotes to apply the step-down min P.}
+\item{stepdown}{a logical variable, which denotes to apply the step-down min P. It defaults to \code{FALSE}.}
 }
 \value{
 \item{.index}{a vector, evaluation grids.}
@@ -74,10 +68,13 @@ the entire range, esp. in case of sparsity. Defaults to \code{FALSE}.}
 \description{
 Testing the difference of two varying distributions.
 }
+\details{
+This is the Details section
+}
 \note{
 \itemize{
 \item If \code{ydata1} and \code{ydata2} are lists of 
-\code{data.frame}s, the lengths of two lists must be the same.
+\code{data.frame}s, the lenghs of two lists must be the same.
 
 \item If \code{mgcv.gam} is \code{TRUE}, \code{...} and \code{exclue} are \code{NULL} 
 (default settings), then they both default to \cr
@@ -92,7 +89,6 @@ Note that the permuted data may not match some specific distributions during the
 }
 \examples{
 
-library(DVDtest)
 ## Data Generation ##
  p <- 6
  mu1 <- function(t) 0.2*(p-1)*sin(pi*t)+t+1
@@ -112,32 +108,34 @@ library(DVDtest)
  dg1 <- melt(data1)
  dg2 <- melt(data2)
  colnames(dg1) <- colnames(dg2) <- c('.obs','.index','.value')
+ 
  # library(ggplot2)
  # ggplot() + geom_line(data = dg1, aes(x = .index,y = .value, group = .obs))
  # + geom_line(data = dg2, aes(x = .index, y = .value, group = .obs))
 
  ngrid <- 50
  ev.grid <- seq(0, 1, , ngrid)
- nperm. <- 40
+ nperm. <- 30
  
 ####Estimated with mgcv::gam
  library(mgcv)
- simu.test1 <- DVDtest(dg1, dg2, nperm., ev.grid)
+ simu.test1 <- DVDtest(dg1, dg2, nperm. ,ev.grid)
  
-####Estimated with gamlss::gamlss
+####Estimated with gamlss::gamlss -! under debugging
+ \dontrun{
  library(gamlss)
- simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
-               sigma.formula = ~pb(.index), random = ~1|.obs, family = NO, mgcv.gam=FALSE)
-               
+ library(gamlss.add)
+ simu.test2 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ ga(~s(.index)) + 
+                       ga(~s(.obs, bs = "re")), 
+                       sigma.formula = ~ga(~s(.index)), family = NO, mgcv.gam=FALSE)
+ }
 ####Plot
  simu.figs <- DVDplot(simu.test1)
  simu.figs$pfig
  simu.figs$kfig[[1]]
- 
 
-####Non-normal case
-\dontrun{
- p <- 6
+####Non-normal case -! under debugging
+ \dontrun{
  mu1 <- function(t) 0.2*(p-1)*sin(pi*t)+t+1
  mu2 <- function(t) -0.2*(p-1)*sin(pi*t)+t+1
  sig1 <- function(t) t+1
@@ -145,7 +143,7 @@ library(DVDtest)
  nu1 <- function(t) t+1
  nu2 <- nu1
  nperson <- 10
- 
+ library(gamlss)
  fun1 <- function(t) rGG(nperson, mu1(t), sig1(t),nu1(t))
  fun2 <- function(t) rGG(nperson, mu2(t), sig2(t),nu2(t))
  tp <- seq(0,1,,10)
@@ -154,20 +152,19 @@ library(DVDtest)
  
  library(reshape2)
  colnames(data2) <- colnames(data1) <- tp
- rownames(data2) <- 1:nperson+nperson
+ rownames(data2) <- 1:nperson+2*nperson
  dg1 <- melt(data1)
  dg2 <- melt(data2)
  colnames(dg1) <- colnames(dg2) <- c('.obs','.index','.value')
  
  ngrid <- 50
  ev.grid <- seq(0, 1, , ngrid)
- nperm. <- 40
- 
+ nperm. <- 30
  simu.test3 <- DVDtest(dg1, dg2, nperm.,ev.grid, formula = .value ~ pb(.index), 
                        sigma.formula = ~pb(.index),
                        nu.formula= ~pb(.index), seeds=123,
                        random = ~1|.obs, family = GG, mgcv.gam = FALSE)
-}
+ }
 }
 \references{
 reiss-EMR18.pdf

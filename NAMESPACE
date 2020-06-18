@@ -3,6 +3,7 @@
 export(DVDplot)
 export(DVDtest)
 import(gamlss)
+import(gamlss.add)
 import(gamlss.dist)
 import(ggplot2)
 import(mgcv)

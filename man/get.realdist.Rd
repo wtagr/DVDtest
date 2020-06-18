@@ -19,8 +19,6 @@ get.realdist(k, ydata1, ydata2, grid, ..., exclude, dist.method, mgcv.gam)
 
 \item{dist.method}{see \code{DVDtest}}
 
-\item{mgcv.gam}{see \code{DVDtest}}
-
 \item{excl}{an argument of \code{predict} for \code{gam}}
 }
 \value{

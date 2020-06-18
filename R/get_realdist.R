@@ -8,14 +8,12 @@
 #' @param excl an argument of \code{predict} for \code{gam}
 #' @param dist.method see \code{DVDtest}
 #' @param mc.cores see the 2nd element of \code{mc.cores} in \code{DVDtest}
-#' @param mgcv.gam see \code{DVDtest}
 #' @return a vector or matrix of the distances and list of parameters of varying 
 #' distributions.
 #' @author Meng Xu, Philip Reiss
 #' @seealso \code{\link{DVDtest}}
 #' @import parallel
 #' @keywords internal
-
 
 
 get_realdist <- function(ydata1, ydata2, grid, ..., exclude, mc.cores, 
@@ -31,3 +29,4 @@ get_realdist <- function(ydata1, ydata2, grid, ..., exclude, mc.cores,
   }
   return(list(realdists = realdists, vdparam = vd_param))
 }
+
