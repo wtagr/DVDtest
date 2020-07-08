@@ -200,5 +200,9 @@ DVDtest <- function(ydata1, ydata2, nperm, grid, dist.method = "wass",
       p.mat <- get.pval.sd(permarray = permarray, param.array = param.array, 
                            realdists = realdists, nroi = nroi, grid = grid, nperm = nperm)
     }
-    return(list(.index = grid, pval = p.mat, vdparam = vdparam))
+    
+    res <- list(.index = grid, pval = p.mat, vdparam = vdparam)
+    attr(res,"realdist") <- realdists
+    attr(res, "permdist") <- permarray
+    return(res)
 }
